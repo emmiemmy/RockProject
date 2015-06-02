@@ -3,8 +3,8 @@ package project;
 import java.io.Serializable;
 
 public class Information implements Serializable {
-	// Anställd
-	private int personalCodeNumber;
+	// Anstï¿½lld
+	private int personID;
 	private String employeeName;
 	private String employeeAdress;
 	private String employeeTask;
@@ -20,16 +20,16 @@ public class Information implements Serializable {
 	private String partytrick;
 
 	/**
-	 * Anställdinformation
+	 * AnstÃ¤lldinformation
 	 * 
 	 * @param inPersonalCodeNumber
 	 * @param inEmployeeName
 	 * @param inEmployeeAdress
 	 * @param inEmployeeTask
 	 */
-	public void setEmployeeInformation(int inPersonalCodeNumber, String inEmployeeName,
+	public void setEmployeeInformation(int inPersonID, String inEmployeeName,
 			String inEmployeeAdress, String inEmployeeTask) {
-		this.personalCodeNumber = inPersonalCodeNumber;
+		this.personID = inPersonID;
 		this.employeeName = inEmployeeName;
 		this.employeeAdress = inEmployeeAdress;
 		this.employeeTask = inEmployeeTask;
@@ -67,13 +67,13 @@ public class Information implements Serializable {
 		this.partytrick = inPartytrick;
 	}
 	
-	// Anställd
+	// Anstï¿½lld
 	public void setPersonalCodeNumber(int personalCodeNumber) {
-		this.personalCodeNumber = personalCodeNumber;
+		this.personID = personalCodeNumber;
 	}
 	
 	public int getPersonalCodeNumber() {
-		return personalCodeNumber;
+		return personID;
 	}
 	
 	public void setEmployeeName(String employeeName) {

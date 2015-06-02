@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.LinkedList;
 
 public class DatabaseConnector {
 
@@ -22,7 +23,7 @@ public class DatabaseConnector {
 	}
 
 	/**
-	 * Gˆr en uppkoppling till databasen.
+	 * G√∂r en uppkoppling till databasen.
 	 * 
 	 * @return
 	 */
@@ -44,11 +45,9 @@ public class DatabaseConnector {
 			stat = conn.createStatement();
 			rs = stat.executeQuery("select * from anstalld");
 			while (rs.next()) {
-				Information info = new Information(); // Forts‰tter h‰r sen.
-				info.setEmployeeInformation(
-						rs.getInt("Personnummer"),
-						rs.getString("Namn"),
-						rs.getString("Adress"),
+				Information info = new Information();
+				info.setEmployeeInformation(rs.getInt("Personnummer"),
+						rs.getString("Namn"), rs.getString("Adress"),
 						rs.getString("Arbetsuppgift"));
 				System.out.println(info.getEmployeeName());
 			}
@@ -57,7 +56,8 @@ public class DatabaseConnector {
 		}
 	}
 
-	public void getBandDatabase() { // Inparameter med vilket namn den ska h‰mta.
+	public void getBandDatabase() { // Inparameter med vilket bandnamn den ska
+									// h√§mta.
 		System.out.println("DatabaseConnector: getBandDatabase()");
 		try {
 			conn = connectToDatabase();
@@ -65,11 +65,9 @@ public class DatabaseConnector {
 			rs = stat.executeQuery("select * from band");
 			while (rs.next()) {
 				Information info = new Information();
-				info.setBandInformation(
-				rs.getInt("BandID"),
-				rs.getString("Namn"),
-				rs.getString("Musikstil"),
-				rs.getString("Ursprungsland"));
+				info.setBandInformation(rs.getInt("BandID"),
+						rs.getString("Namn"), rs.getString("Musikstil"),
+						rs.getString("Ursprungsland"));
 				System.out.println(info.getBandName());
 			}
 		} catch (Exception e) {
@@ -82,35 +80,70 @@ public class DatabaseConnector {
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
-			rs = stat.executeQuery("select * from medlem limit 1"); // Limit sÂl‰nge bara, fˆr undvika massiv utskrift.
+			rs = stat.executeQuery("select * from medlem limit 1");
+			/*
+			 * Limit s√•l√§nge bara, f√∂r undvika massiv utskrift.
+			 */
 			while (rs.next()) {
 				Information info = new Information();
-				info.setMemberInformation(
-						rs.getInt("MedlemID"),
-						rs.getString("Namn"),
-						rs.getInt("BandID"),
+				info.setMemberInformation(rs.getInt("MedlemID"),
+						rs.getString("Namn"), rs.getInt("BandID"),
 						rs.getString("Partytrick"));
-				System.out.println("MelemID: " + info.getMemberID() + "\nNamn: "+ info.getMemberName() +
-						"\nBandID: " + info.getFkBandID() + "\nPartytrick: "+ info.getPartytrick());
+				System.out.println("MelemID: " + info.getMemberID()
+						+ "\nNamn: " + info.getMemberName() + "\nBandID: "
+						+ info.getFkBandID() + "\nPartytrick: "
+						+ info.getPartytrick());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void getStageDatabase() {
-		System.out.println("DatabaseConnector: getStageDatabase()");
-		try {
-			conn = connectToDatabase();
-			stat = conn.createStatement();
-			rs = stat.executeQuery("select * from scen");
-			while (rs.next()) {
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	// G√∂r om till en metod som uppfyller en funktion ist√§llet
+	// public LinkedList getStageDatabase(String stageName, int capacity) {
+	// LinkedList<String> stageList = new LinkedList<String>();
+	// String stage;
+	// System.out.println("DatabaseConnector: getStageDatabase()");
+	// try {
+	// conn = connectToDatabase();
+	// stat = conn.createStatement();
+	// while (rs.next()) {
+	// if() { // Fyll p√• med villkor
+	// String stageIDSQL = "select ScenID from scen";
+	// rs = stat.executeQuery(stageIDSQL);
+	// stage = rs.getString("ScenID");
+	// stageList.add(stage);
+	// }
+	// if() {
+	// String stageNameSQL = "select Namn from scen";
+	// rs = stat.executeQuery(stageNameSQL);
+	// stage = rs.getString("Namn");
+	// stageList.add(stage);
+	// }
+	// if() {
+	// String stageCapacitySQL = "select Kapacitet from scen";
+	// rs = stat.executeQuery(stageCapacitySQL);
+	// stage = rs.getString("Kapacitet");
+	// stageList.add(stage);
+	// }
+	// if() {
+	// String stageResponsibleIDSQL = "select AnsvarigID from scen";
+	// rs = stat.executeQuery(stageResponsibleIDSQL);
+	// stage = rs.getString("AnsvarigID");
+	// stageList.add(stage);
+	// }
+	// if() {
+	// String stageResponsibleIDSQL = "select AnsvarigID from scen";
+	// rs = stat.executeQuery(stageResponsibleIDSQL);
+	// stage = rs.getString("AnsvarigID");
+	// stageList.add(stage);
+	// }
+	// }
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// return stageList;
+	// }
 
 	public void getGigDatabase() {
 		System.out.println("DatabaseConnector: getGigDatabase()");
@@ -139,10 +172,11 @@ public class DatabaseConnector {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		DatabaseConnector databaseConnector = new DatabaseConnector();
 		databaseConnector.connectToDatabase();
+		// databaseConnector.getEmployeeDatabase();
 		databaseConnector.getBandDatabase();
 		databaseConnector.getMemberDatabase();
 	}
