@@ -38,6 +38,80 @@ public class DatabaseConnector {
 		return conn;
 	}
 
+	/**
+	 * Visar medlemsinfo om namn och partytrick.
+	 * 
+	 * @param name
+	 */
+	public void getMemberInfo(String name) {
+		String membername = "", partytrick = "";
+		try {
+			conn = connectToDatabase();
+			stat = conn.createStatement();
+			String sql = "SELECT Namn, Partytrick FROM Medlem WHERE Namn = '"
+					+ name + "'";
+			rs = stat.executeQuery(sql);
+			while (rs.next()) {
+				membername = rs.getString("Namn");
+				partytrick = rs.getString("Partytrick");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(membername + partytrick);
+	}
+
+	/**
+	 * Visar bandinfo om namn, ursprungsland, musikstil och medlemmar.
+	 * 
+	 * @param name
+	 */
+	public void getBandInfo(String name) {
+		String bandname = "", membername = "", country = "", genre = "";
+		try {
+			conn = connectToDatabase();
+			stat = conn.createStatement();
+			String sql = "SELECT b.Namn, m.Namn, b.Ursprungsland, b.Musikstil FROM band b INNER JOIN medlem m ON b.BandID = m.BandID WHERE b.BandID IN (SELECT BandID FROM Band WHERE Namn = '"
+					+ name + "')";
+			rs = stat.executeQuery(sql);
+			while (rs.next()) {
+				bandname = rs.getString("b.Namn");
+				membername = rs.getString("m.Namn");
+				country = rs.getString("Ursprungsland");
+				genre = rs.getString("Musikstil");
+				System.out.println(membername);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(bandname + country + genre);
+	}
+
+	/**
+	 * Söker efter spelschema relaterat till band, scen och tid.
+	 */
+	public void getGigSchedule(String name) {
+		String bandname = "", stagename ="", day ="";
+		try {
+			conn = connectToDatabase();
+			stat = conn.createStatement();
+			String sql = "SELECT SELECT b.Namn, s.Namn, Dag FROM Band b INNER JOIN SpelarPa s ON b.BandID = s.BandID FROM Scen INNER JOIN Tidschema t ON s.ScenID = t.ScenID WHERE b.Namn = '"
+					+ name + "'";
+			rs = stat.executeQuery(sql);
+			while (rs.next()) {
+				bandname = rs.getString("b.Namn");
+				stagename = rs.getString("s.Namn");
+				day = rs.getString("Dag");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(bandname + stagename + day);
+	}
+
+	/*
+	 * Nedanstående metoder ska ej användas.
+	 */
 	public void getEmployeeDatabase() {
 		System.out.println("DatabaseConnector: getEmployedDatabase()");
 		try {
@@ -175,9 +249,7 @@ public class DatabaseConnector {
 
 	public static void main(String[] args) {
 		DatabaseConnector databaseConnector = new DatabaseConnector();
-		databaseConnector.connectToDatabase();
-		// databaseConnector.getEmployeeDatabase();
-		databaseConnector.getBandDatabase();
-		databaseConnector.getMemberDatabase();
+		// databaseConnector.getMemberInfo("Kurt Cobain");
+		databaseConnector.getBandInfo("Nirvana");
 	}
 }
