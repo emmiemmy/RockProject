@@ -97,9 +97,10 @@ public class UserUI2 {
 			JComboBox cb = (JComboBox) e.getSource();
 			String choice = (String) cb.getSelectedItem();
 			System.out.println(choice);
-
-			textArea.setText("Här visas " + choice
-					+ "och information om bandet");
+			LinkedList<String> s = new LinkedList<String>();
+			s = controller.getBandInfo(choice);
+			textArea.setText("BandNamn: " + s.get(0) + "\nUrsprungsland:" + 
+			s.get(1)+  "\nGenre:" + "Medlemmar:" );
 			combo_box_medlem.removeAllItems();
 			combo_box_medlem.addItem(null);
 
@@ -125,15 +126,15 @@ public class UserUI2 {
 			JComboBox cb = (JComboBox) e.getSource();
 			String choice = (String) cb.getSelectedItem();
 			System.out.println(choice);
-			String[] medlemInfo = new String[1];
+			LinkedList<String> medlemInfo = new LinkedList<String>();
 			medlemInfo = controller.getMemberInfo(choice);// Metod som
 															// returnerar en
-															// sträng[2] som
+															// LinkedList som
 															// innehåller
 															// info om vald
 															// medlem
-			textArea.setText("Namn:" + medlemInfo[0] + "\n" + "Partytrick:"
-					+ medlemInfo[1]);
+			textArea.setText("Namn:" + medlemInfo.get(0) + "\n" + "Partytrick:"
+					+ medlemInfo.get(1));
 
 		}
 
