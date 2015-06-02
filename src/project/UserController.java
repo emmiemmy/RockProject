@@ -44,10 +44,8 @@ public class UserController {
  * @param choice - Medlem som det skall hämtas information om
  * @return
  */
-	public LinkedList getMemberInfo(String medlem) {
-		LinkedList<String> s = new LinkedList<String>();
-		//s = db.getMemberDatabase(medlem);//metod i DB som returnerar Länkad lista med information om medlemmen
-		return s;
+	public void getMemberInfo(String medlem) {
+		db.getMemberInfo(medlem);//metod i DB som skriver ut info om medlem
 	}
 	
 	public void getBandList(){

@@ -63,6 +63,7 @@ public class DatabaseConnector {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		ui.textArea.append("\nMedlem: \t" + membername + "\nPartytrick: \t" + partytrick);
 		System.out.println(membername + partytrick);
 	}
 
@@ -100,6 +101,7 @@ public class DatabaseConnector {
 		for(String medlem : medlemmar){
 			ui.textArea.append(medlem + "\n\t\t");
 		}
+		ui.populateMemberBox(medlemmar);
 		System.out.println(bandname + country + genre);
 	}
 
