@@ -37,7 +37,7 @@ public class DatabaseConnector {
 		return conn;
 	}
 
-	public void getEmployedDatabase() {
+	public void getEmployeeDatabase() {
 		System.out.println("DatabaseConnector: getEmployedDatabase()");
 		try {
 			conn = connectToDatabase();
@@ -45,20 +45,27 @@ public class DatabaseConnector {
 			rs = stat.executeQuery("select * from anstalld");
 			while (rs.next()) {
 				Information info = new Information(); // Fortsätter här sen.
+				info.setEmployeeInformation(
+						rs.getInt("Personnummer"),
+						rs.getString("Namn"),
+						rs.getString("Adress"),
+						rs.getString("Arbetsuppgift"));
+				System.out.println(info.getEmployeeName());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void getBandDatabase() {
+	public void getBandDatabase() { // Inparameter med vilket namn den ska hämta.
 		System.out.println("DatabaseConnector: getBandDatabase()");
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
 			rs = stat.executeQuery("select * from band");
 			while (rs.next()) {
-				Information info = new Information(
+				Information info = new Information();
+				info.setBandInformation(
 				rs.getInt("BandID"),
 				rs.getString("Namn"),
 				rs.getString("Musikstil"),
@@ -77,7 +84,8 @@ public class DatabaseConnector {
 			stat = conn.createStatement();
 			rs = stat.executeQuery("select * from medlem limit 1"); // Limit sålänge bara, för undvika massiv utskrift.
 			while (rs.next()) {
-				Information info = new Information(
+				Information info = new Information();
+				info.setMemberInformation(
 						rs.getInt("MedlemID"),
 						rs.getString("Namn"),
 						rs.getInt("BandID"),
