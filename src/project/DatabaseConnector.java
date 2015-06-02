@@ -44,7 +44,7 @@ public class DatabaseConnector {
 			stat = conn.createStatement();
 			rs = stat.executeQuery("select * from anstalld");
 			while (rs.next()) {
-
+				Information info = new Information(); // Fortsätter här sen.
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,14 +75,15 @@ public class DatabaseConnector {
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
-			rs = stat.executeQuery("select * from medlem");
+			rs = stat.executeQuery("select * from medlem limit 1"); // Limit sålänge bara, för undvika massiv utskrift.
 			while (rs.next()) {
 				Information info = new Information(
 						rs.getInt("MedlemID"),
 						rs.getString("Namn"),
 						rs.getInt("BandID"),
 						rs.getString("Partytrick"));
-				System.out.println(info.getMemberName());
+				System.out.println("MelemID: " + info.getMemberID() + "\nNamn: "+ info.getMemberName() +
+						"\nBandID: " + info.getFkBandID() + "\nPartytrick: "+ info.getPartytrick());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
