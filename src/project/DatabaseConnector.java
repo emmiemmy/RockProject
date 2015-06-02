@@ -16,10 +16,15 @@ public class DatabaseConnector {
 	private static final String PASSWORD = "emma";
 	private UserController userController;
 	private AdminController adminController;
+	private UserUI2 ui;
 
 	public void setControllers(UserController uc, AdminController ac) {
 		userController = uc;
 		adminController = ac;
+	}
+
+	public void setUI(UserUI2 ui) {
+		this.ui = ui;
 	}
 
 	/**
@@ -68,6 +73,8 @@ public class DatabaseConnector {
 	 */
 	public void getBandInfo(String name) {
 		String bandname = "", membername = "", country = "", genre = "";
+		LinkedList<String> medlemmar = new LinkedList<String>();
+
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
@@ -79,10 +86,19 @@ public class DatabaseConnector {
 				membername = rs.getString("m.Namn");
 				country = rs.getString("Ursprungsland");
 				genre = rs.getString("Musikstil");
+				medlemmar.add(membername);
 				System.out.println(membername);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		ui.textArea.append(""
+				+ "Band: \t\t" + bandname + 
+				"\nUrsprungsland: \t" + country + 
+				"\nMusikstil: \t\t" + genre + "\nMedlemmar:\n\t\t");
+		for(String medlem : medlemmar){
+			ui.textArea.append(medlem + "\n\t\t");
 		}
 		System.out.println(bandname + country + genre);
 	}
@@ -91,7 +107,7 @@ public class DatabaseConnector {
 	 * Söker efter spelschema relaterat till band, scen och tid.
 	 */
 	public void getGigSchedule(String name) {
-		String bandname = "", stagename ="", day ="";
+		String bandname = "", stagename = "", day = "";
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
@@ -107,6 +123,31 @@ public class DatabaseConnector {
 			e.printStackTrace();
 		}
 		System.out.println(bandname + stagename + day);
+	}
+
+	/**
+	 * Metoden hämtar samtliga band i tabellen
+	 * 
+	 * @return - en lista med samtliga namn
+	 */
+	public LinkedList<String> getBandList() {
+		LinkedList<String> s = new LinkedList<String>();
+		try {
+			conn = connectToDatabase();
+			stat = conn.createStatement();
+			String sql = "SELECT Namn FROM band";
+			rs = stat.executeQuery(sql);
+			while (rs.next()) {
+				s.add(rs.getString("Namn"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for (String band : s) {
+			System.out.println(band);
+
+		}
+		return s;
 	}
 
 	/*
@@ -251,5 +292,6 @@ public class DatabaseConnector {
 		DatabaseConnector databaseConnector = new DatabaseConnector();
 		// databaseConnector.getMemberInfo("Kurt Cobain");
 		databaseConnector.getBandInfo("Nirvana");
+		// databaseConnector.getBandList();
 	}
 }

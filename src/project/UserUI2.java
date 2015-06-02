@@ -18,7 +18,7 @@ import java.util.LinkedList;
 
 public class UserUI2 {
 
-	UserController controller = new UserController();
+	UserController controller;
 	String[] bandList = { "Metallica", "Nirvana", "Greenday", "Muse", "Oasis" };
 	String[] nirvanaList = { "Kurt Cobain1", "Kurt Cobain2" };
 	String[] metallicaList = { "Metallica1", "Metallica2", "Metallica3" };
@@ -27,9 +27,11 @@ public class UserUI2 {
 	private JButton btnShowSchedule = new JButton("Hämta spelschema");
 
 	JTextArea textArea = new JTextArea();
-	JComboBox combo_box_medlem = new JComboBox();
+	JComboBox<String> combo_box_medlem = new JComboBox<String>();
+	JComboBox<String> combo_box_band = new JComboBox<String>();
 
-	private JFrame frame;
+
+	JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -63,12 +65,13 @@ public class UserUI2 {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		controller = new UserController();
+		controller = new UserController(this);
 
-		JComboBox combo_box_band = new JComboBox(bandList);
 		combo_box_band.setBounds(6, 54, 190, 27);
+		
 		frame.getContentPane().add(combo_box_band);
 		combo_box_band.addActionListener(new ComboBox());
+		controller.getBandList();//fyller i listan med band som finns i DB
 
 		textArea.setBounds(215, 20, 367, 357);
 		frame.getContentPane().add(textArea);
@@ -85,6 +88,23 @@ public class UserUI2 {
 		frame.getContentPane().add(btnShowSchedule);
 		combo_box_medlem.addActionListener(new ComboBox_medlem());
 	}
+	
+	public void populateBandBox(LinkedList<String> s){
+		combo_box_band.addItem("Välj band");
+		for(String name : s){
+			combo_box_band.addItem(name);
+
+		}
+
+	}
+	
+	public void populateMemberBox(LinkedList<String> s){
+		combo_box_medlem.addItem(null);
+		for (String name : s){
+			combo_box_medlem.addItem(name);
+		}
+
+	}
 
 	/**
 	 * Lyssnare till ComboBoxen
@@ -97,22 +117,28 @@ public class UserUI2 {
 			JComboBox cb = (JComboBox) e.getSource();
 			String choice = (String) cb.getSelectedItem();
 			System.out.println(choice);
-			LinkedList<String> s = new LinkedList<String>();
-			s = controller.getBandInfo(choice);
-			textArea.setText("BandNamn: " + s.get(0) + "\nUrsprungsland:" + 
-			s.get(1)+  "\nGenre:" + "Medlemmar:" );
-			combo_box_medlem.removeAllItems();
-			combo_box_medlem.addItem(null);
-
-			if (choice.equals("Nirvana")) {
-				for (String name : nirvanaList)
-					combo_box_medlem.addItem(name);
+			if(!choice.equals("Välj band")){
+				LinkedList<String> s = new LinkedList<String>();
+				controller.getBandInfo(choice);
+				combo_box_band.setEnabled(false);
 
 			}
-			if(choice.equals("Metallica")){
-				for (String name : metallicaList)
-					combo_box_medlem.addItem(name);
-			}
+
+			
+//			textArea.setText("BandNamn: " + s.get(0) + "\nUrsprungsland:" + 
+//			s.get(1)+  "\nGenre:" + "Medlemmar:" );
+			
+			
+			
+//			if (choice.equals("Nirvana")) {
+//				for (String name : nirvanaList)
+//					combo_box_medlem.addItem(name);
+//
+//			}
+//			if(choice.equals("Metallica")){
+//				for (String name : metallicaList)
+//					combo_box_medlem.addItem(name);
+//			}
 		}
 
 	}
@@ -142,11 +168,14 @@ public class UserUI2 {
 
 	public class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == btnClear)
+			if (e.getSource() == btnClear){
 				textArea.setText("");
+				combo_box_band.setEnabled(true);
+			}
+			
 			if (e.getSource() == btnShowSchedule) {
 				LinkedList<String> schema = new LinkedList<String>();
-				schema = controller.getBandSchedule();// Metod som hämtar
+				//schema = controller.getBandSchedule(combo_box_band);// Metod som hämtar
 														// bandschema för
 				// specifikt
 				// band

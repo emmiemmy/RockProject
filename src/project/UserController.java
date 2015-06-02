@@ -11,8 +11,14 @@ import java.util.LinkedList;
 public class UserController {
 	
 	DatabaseConnector db = new DatabaseConnector();
+	UserUI2 ui ;
 	Information info = new Information();
+	
 
+	public UserController(UserUI2 userUI2) {
+		ui = userUI2;
+		db.setUI(userUI2);
+	}
 	/**
 	 * Metod som hämtar bandschema för valt band
 	 */
@@ -29,7 +35,7 @@ public class UserController {
 	 */
 	public LinkedList getBandInfo(String bandNamn){
 		LinkedList<String> s = new LinkedList<String>();
-		db.getBandDatabase(bandNamn);
+		db.getBandInfo(bandNamn);
 		return s;
 	
 	}
@@ -44,5 +50,13 @@ public class UserController {
 		return s;
 	}
 	
+	public void getBandList(){
+		ui.populateBandBox(db.getBandList());
+	}
+	
+	
+	
 
 }
+
+
