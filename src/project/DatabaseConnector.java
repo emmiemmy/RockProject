@@ -16,15 +16,20 @@ public class DatabaseConnector {
 	private static final String PASSWORD = "emma";
 	private UserController userController;
 	private AdminController adminController;
-	private UserUI2 ui;
+	private UserUI2 userUI;
+	private AdminUIWB adminUI;
 
 	public void setControllers(UserController uc, AdminController ac) {
 		userController = uc;
 		adminController = ac;
 	}
 
-	public void setUI(UserUI2 ui) {
-		this.ui = ui;
+	public void setUserUI(UserUI2 ui) {
+		this.userUI = ui;
+	}
+	
+	public void setAdminUI(AdminUIWB ui){
+		this.adminUI = ui;
 	}
 
 	/**
@@ -63,7 +68,7 @@ public class DatabaseConnector {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ui.textArea.append("\nMedlem: \t" + membername + "\nPartytrick: \t" + partytrick);
+		userUI.textArea.append("\nMedlem: \t" + membername + "\nPartytrick: \t" + partytrick);
 		System.out.println(membername + partytrick);
 	}
 
@@ -94,14 +99,14 @@ public class DatabaseConnector {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ui.textArea.append(""
+		userUI.textArea.append(""
 				+ "Band: \t\t" + bandname + 
 				"\nUrsprungsland: \t" + country + 
 				"\nMusikstil: \t\t" + genre + "\nMedlemmar:\n\t\t");
 		for(String medlem : medlemmar){
-			ui.textArea.append(medlem + "\n\t\t");
+			userUI.textArea.append(medlem + "\n\t\t");
 		}
-		ui.populateMemberBox(medlemmar);
+		userUI.populateMemberBox(medlemmar);
 		System.out.println(bandname + country + genre);
 	}
 
