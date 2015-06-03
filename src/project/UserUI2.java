@@ -19,9 +19,7 @@ import java.util.LinkedList;
 public class UserUI2 {
 
 	UserController controller;
-	String[] bandList = { "Metallica", "Nirvana", "Greenday", "Muse", "Oasis" };
-	String[] nirvanaList = { "Kurt Cobain1", "Kurt Cobain2" };
-	String[] metallicaList = { "Metallica1", "Metallica2", "Metallica3" };
+	String band, medlem;
 
 	private JButton btnClear = new JButton("Ny sökning");
 	private JButton btnShowSchedule = new JButton("Hämta spelschema");
@@ -116,6 +114,7 @@ public class UserUI2 {
 			JComboBox cb = (JComboBox) e.getSource();
 			String choice = (String) cb.getSelectedItem();
 			System.out.println(choice);
+			band = choice;
 			if (!choice.equals("Välj band")) {
 				LinkedList<String> s = new LinkedList<String>();
 				controller.getBandInfo(choice);
@@ -124,18 +123,6 @@ public class UserUI2 {
 
 			}
 
-			// textArea.setText("BandNamn: " + s.get(0) + "\nUrsprungsland:" +
-			// s.get(1)+ "\nGenre:" + "Medlemmar:" );
-
-			// if (choice.equals("Nirvana")) {
-			// for (String name : nirvanaList)
-			// combo_box_medlem.addItem(name);
-			//
-			// }
-			// if(choice.equals("Metallica")){
-			// for (String name : metallicaList)
-			// combo_box_medlem.addItem(name);
-			// }
 		}
 
 	}
@@ -150,6 +137,7 @@ public class UserUI2 {
 			JComboBox cb = (JComboBox) e.getSource();
 			String choice = (String) cb.getSelectedItem();
 			System.out.println(choice);
+			medlem = choice;
 			if((choice!="Medlemmar" && choice!=null))
 			controller.getMemberInfo(choice);// Metod som
 												// returnerar en
@@ -175,14 +163,8 @@ public class UserUI2 {
 			}
 
 			if (e.getSource() == btnShowSchedule) {
-				LinkedList<String> schema = new LinkedList<String>();
-				// schema = controller.getBandSchedule(combo_box_band);// Metod
-				// som hämtar
-				// bandschema för
-				// specifikt
-				// band
-				textArea.setText("Band: " + schema.get(0) + "\nScen: "
-						+ schema.get(1) + "\nDag och tid:");
+				textArea.setText("");
+				controller.getBandSchedule(band);
 			}
 		}
 	}

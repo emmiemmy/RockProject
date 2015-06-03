@@ -4,49 +4,51 @@ import java.util.LinkedList;
 
 /**
  * 
- * @author emmashakespeare
- * Metoderna i Controllern anropar metoder i DB klassen som returnerar 
- * Linked Lists innehållande önskad information
+ * @author emmashakespeare Metoderna i Controllern anropar metoder i DB klassen
+ *         som returnerar Linked Lists innehållande önskad information
  */
 public class UserController {
-	
-	DatabaseConnector db = new DatabaseConnector();
-	UserUI2 ui ;
 
-	public UserController(UserUI2 userUI2) {
+	DatabaseConnector db = new DatabaseConnector();
+	UserUI2 ui;
+
+	public UserController(UserUI2 userUI2) {//ANVÄNDS EJ ÄNNU
 		ui = userUI2;
 		db.setUI(userUI2);
 	}
+
 	/**
-	 * Metod som hämtar bandschema för valt band
+	 * Metod som hämtar bandschema för valt band: band, scen och tidpunkt EJ KLAR!!!
 	 */
-	public LinkedList getBandSchedule(String bandNamn) {
-		//länkad lista innehåller Scen, Dag och tidpunkt
-		LinkedList<String> s = new LinkedList<String>();
-		
-		return s;
+	public void getBandSchedule(String bandNamn) {
+
 	}
+
 	/**
-	 * Hämtar en lista med information om bandet: Namn, Ursprungsland, Muskgenre, Medlemmar
+	 * Skickar information om vilket band som DB skall hämta info om: Namn, KLAR, FUNGERAR
+	 * Ursprungsland, Muskgenre, Medlemmar
+	 * 
 	 * @param bandNamn
-	 * @return
 	 */
-	public LinkedList getBandInfo(String bandNamn){
-		LinkedList<String> s = new LinkedList<String>();
+	public void getBandInfo(String bandNamn) {
 		db.getBandInfo(bandNamn);
-		return s;
-	
+
 	}
-/**
- * Hämtar en lista med information om specifik medlem
- * @param choice - Medlem som det skall hämtas information om
- * @return
- */
+
+	/**
+	 * @param choice
+	 *            - Medlem som det skall hämtas information om DB-klassen lägger KLAR; FUNGERAR
+	 *            in info i ui
+	 */
 	public void getMemberInfo(String medlem) {
-		db.getMemberInfo(medlem);//metod i DB som skriver ut info om medlem
+		db.getMemberInfo(medlem);// metod i DB som skriver ut info om medlem
 	}
-	
-	public void getBandList(){
+
+	/**
+	 * Metoden anropar metod i db klassen som returnerar en lista på alla band KLAR FUNGERAR, /////Återanvänd i Admincontroller!!!
+	 * och lägger in dessa i ui combo_boxes
+	 */
+	public void getBandList() {
 		ui.populateBandBox(db.getBandList());
 	}
 }
