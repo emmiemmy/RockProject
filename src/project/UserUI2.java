@@ -58,7 +58,7 @@ public class UserUI2 {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 622, 466);
+		frame.setBounds(100, 100, 720, 466);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -70,16 +70,16 @@ public class UserUI2 {
 		cmbBand.addActionListener(new ComboBox());
 		controller.getBandList();// fyller i listan med band som finns i DB
 
-		textArea.setBounds(215, 20, 367, 357);
+		textArea.setBounds(215, 20, 460, 357);
 		frame.getContentPane().add(textArea);
 
 		btnClear.addActionListener(new ButtonListener());
-		btnClear.setBounds(0, 350, 135, 27);
+		btnClear.setBounds(0, 350, 150, 27);
 		frame.getContentPane().add(btnClear);
 
 		cmbMedlem.setBounds(6, 93, 190, 27);
 		frame.getContentPane().add(cmbMedlem);
-		btnShowSchedule.setBounds(6, 147, 129, 27);
+		btnShowSchedule.setBounds(6, 147, 150, 27);
 		btnShowSchedule.addActionListener(new ButtonListener());
 
 		frame.getContentPane().add(btnShowSchedule);

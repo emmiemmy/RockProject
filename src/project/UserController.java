@@ -21,7 +21,7 @@ public class UserController {
 	 * Metod som hämtar bandschema för valt band: band, scen och tidpunkt EJ KLAR!!!
 	 */
 	public void getBandSchedule(String bandNamn) {
-
+		db.getGigSchedule(bandNamn);
 	}
 
 	/**

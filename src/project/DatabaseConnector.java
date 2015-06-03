@@ -111,7 +111,7 @@ public class DatabaseConnector {
 	}
 
 	/**
-	 * Söker efter spelschema relaterat till band, scen och tid. EJ KLAR!
+	 * Söker efter spelschema relaterat till band, scen och tid.
 	 */
 	public void getGigSchedule(String name) {
 		String bandname = "", stagename = "", day = "", time = "";
@@ -127,7 +127,7 @@ public class DatabaseConnector {
 				stagename = rs.getString("sc.Namn");
 				day = rs.getString("sp.Dag");
 				time = rs.getString("sp.Tid");
-				userUI.textArea.append(bandname + " \t" + stagename + " \t" + day + " \t" + time + "\n");
+				userUI.textArea.append("\n" + bandname + "\t" + stagename + "\t" + day + "\t" + time + "\n");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -285,7 +285,6 @@ public class DatabaseConnector {
 	 */
 	public void insertBooking(String bandName, String stage, String day,
 			String time) {
-
 	}
 
 	public static void main(String[] args) {
