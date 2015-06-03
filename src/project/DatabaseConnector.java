@@ -27,8 +27,8 @@ public class DatabaseConnector {
 	public void setUserUI(UserUI2 ui) {
 		this.userUI = ui;
 	}
-	
-	public void setAdminUI(AdminUIWB ui){
+
+	public void setAdminUI(AdminUIWB ui) {
 		this.adminUI = ui;
 	}
 
@@ -68,7 +68,8 @@ public class DatabaseConnector {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		userUI.textArea.append("\nMedlem: \t" + membername + "\nPartytrick: \t" + partytrick);
+		userUI.textArea.append("\nMedlem: \t" + membername + "\nPartytrick: \t"
+				+ partytrick);
 		System.out.println(membername + partytrick);
 	}
 
@@ -99,11 +100,10 @@ public class DatabaseConnector {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		userUI.textArea.append(""
-				+ "Band: \t\t" + bandname + 
-				"\nUrsprungsland: \t" + country + 
-				"\nMusikstil: \t\t" + genre + "\nMedlemmar:\n\t\t");
-		for(String medlem : medlemmar){
+		userUI.textArea.append("" + "Band: \t\t" + bandname
+				+ "\nUrsprungsland: \t" + country + "\nMusikstil: \t\t" + genre
+				+ "\nMedlemmar:\n\t\t");
+		for (String medlem : medlemmar) {
 			userUI.textArea.append(medlem + "\n\t\t");
 		}
 		userUI.populateMemberBox(medlemmar);
@@ -111,7 +111,7 @@ public class DatabaseConnector {
 	}
 
 	/**
-	 * Söker efter spelschema relaterat till band, scen och tid.
+	 * Söker efter spelschema relaterat till band, scen och tid. EJ KLAR!
 	 */
 	public void getGigSchedule(String name) {
 		String bandname = "", stagename = "", day = "";
@@ -155,11 +155,13 @@ public class DatabaseConnector {
 		}
 		return s;
 	}
+
 	/**
-	 * Metoden returnerar en lista på samtliga scener
+	 * Metoden returnerar en lista på samtliga scener.
+	 * 
 	 * @return
 	 */
-	public LinkedList<String> getStageList(){
+	public LinkedList<String> getStageList() {
 		LinkedList<String> s = new LinkedList<String>();
 		try {
 			conn = connectToDatabase();
@@ -177,20 +179,27 @@ public class DatabaseConnector {
 		}
 		return s;
 	}
+
 	/**
 	 * Metoden returnerar en lista på tillgängliga dagar för vald scen
-	 * @param stage OCH TID??????
+	 * 
+	 * @param stage
 	 * @return
 	 */
-	public LinkedList<String> getDayList(String stage){
+	public LinkedList<String> getDayList(String stage) {
 		LinkedList<String> s = new LinkedList<String>();
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
-			String sql = "SELECT Dag FROM spelarPa";//ANPASSA
+			String sql = "SELECT sp.Dag "
+					+ "FROM spelarPa sp "
+					+ "INNER JOIN scen s "
+					+ "ON s.ScenID = sp.ScenID "
+					+ "WHERE sp.ScenID IN (SELECT ScenID FROM scen WHERE Namn = '"
+					+ stage + "') " + "AND sp.BandID IS NULL";
 			rs = stat.executeQuery(sql);
 			while (rs.next()) {
-				s.add(rs.getString("Namn"));
+				s.add(rs.getString("Dag"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -200,24 +209,28 @@ public class DatabaseConnector {
 		}
 		return s;
 	}
+
 	/**
 	 * Metoden returnerar en lista på tillgängliga tider för vald dag
+	 * 
 	 * @param stage
 	 * @return
 	 */
-	public LinkedList<String> getTimeList(String stage, String day){
+	public LinkedList<String> getTimeList(String stage, String day) {
 		LinkedList<String> s = new LinkedList<String>();
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
-			String sql = "SELECT starttid, sluttid FROM spelarPa sp"
-					+ "INNER JOIN Scen sc"
-					+ "ON sp.ScenID = sc.ScenID"
-					+ " WHERE sc.Namn = '" + stage + "' "
-							+ "AND Dag = day";//MÅSTE SKRIVAS OM
+			String sql = "SELECT sp.Tid "
+					+ "FROM spelarPa sp "
+					+ "INNER JOIN scen s "
+					+ "ON s.ScenID = sp.ScenID "
+					+ "WHERE sp.ScenID IN (SELECT ScenID FROM scen WHERE Namn = '"
+					+ stage + "') " + "AND sp.BandID IS NULL "
+					+ "AND sp.Dag = '" + day + "'";
 			rs = stat.executeQuery(sql);
 			while (rs.next()) {
-				s.add(rs.getString("Namn"));
+				s.add(rs.getString("Tid"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -227,16 +240,18 @@ public class DatabaseConnector {
 		}
 		return s;
 	}
+
 	/**
 	 * Metoden returnerar en lista på alla anställda
+	 * 
 	 * @return
 	 */
-	public LinkedList<String> getEmployeeList(){
+	public LinkedList<String> getEmployeeList() {
 		LinkedList<String> s = new LinkedList<String>();
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
-			String sql = "";//MÅSTE SKRIVAS OM
+			String sql = "SELECT Namn FROM anstalld";
 			rs = stat.executeQuery(sql);
 			while (rs.next()) {
 				s.add(rs.getString("Namn"));
@@ -249,27 +264,35 @@ public class DatabaseConnector {
 		}
 		return s;
 	}
+
 	/**
-	 * Metoden skrivr ut bandnamn och respektive kontaktperson i Adminui
+	 * Metoden skriver ut bandnamn och respektive kontaktperson i AdminUI.
 	 */
-	public void getBandContactList(){
-		AdminUI.textArea.append();
+	public void getBandContactList() {
+		adminUI.textArea.append(null);
 	}
+
 	/**
 	 * Metoden lagrar information i respektive tabell
+	 * 
 	 * @param bandName
 	 * @param stage
 	 * @param day
 	 * @param time
 	 */
-	public void insertBooking(String bandName,String stage ,String day,String time){
-		
+	public void insertBooking(String bandName, String stage, String day,
+			String time) {
+
 	}
 
 	public static void main(String[] args) {
-		DatabaseConnector databaseConnector = new DatabaseConnector();
-		// databaseConnector.getMemberInfo("Kurt Cobain");
-		databaseConnector.getBandInfo("Nirvana");
-		// databaseConnector.getBandList();
+		DatabaseConnector dc = new DatabaseConnector();
+//		dc.getStageList();
+		dc.getEmployeeList();
+//		dc.getTimeList("Blomsterscenen", "Torsdag");
+//		dc.getDayList("Blomsterscenen");
+//		dc.getMemberInfo("Kurt Cobain");
+//		dc.getBandInfo("Nirvana");
+//		dc.getBandList();
 	}
 }

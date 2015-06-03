@@ -36,7 +36,7 @@ public class AdminUIWB {
 	private JComboBox cmbDay = new JComboBox();
 	private JComboBox cmbTime = new JComboBox();
 	private String bandName, stage, day, time;
-	private JTextArea textArea = new JTextArea();
+	JTextArea textArea = new JTextArea();
 
 	
 	AdminController controller;
