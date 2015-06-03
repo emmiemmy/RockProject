@@ -17,8 +17,7 @@ public class AdminController {
 	 */
 	public void getBandList(){
 		LinkedList<String> s = new LinkedList<String>();
-		ui.populateBandBox();//Ej ännu implementerad
-		db.getBandList();//metod som returnerar lista
+		ui.populateBandBox(db.getBandList());//Ej ännu implementerad
 	}
 	
 	/**
