@@ -14,7 +14,7 @@ public class UserController {
 
 	public UserController(UserUI2 userUI2) {//ANVÄNDS EJ ÄNNU
 		ui = userUI2;
-		db.setUI(userUI2);
+		db.setUserUI(userUI2);
 	}
 
 	/**
