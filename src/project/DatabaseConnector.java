@@ -114,22 +114,25 @@ public class DatabaseConnector {
 	 * Söker efter spelschema relaterat till band, scen och tid. EJ KLAR!
 	 */
 	public void getGigSchedule(String name) {
-		String bandname = "", stagename = "", day = "";
+		String bandname = "", stagename = "", day = "", time = "";
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
-			String sql = "SELECT SELECT b.Namn, s.Namn, Dag FROM Band b INNER JOIN SpelarPa s ON b.BandID = s.BandID FROM Scen INNER JOIN Tidschema t ON s.ScenID = t.ScenID WHERE b.Namn = '"
-					+ name + "'";
+			String sql = "SELECT sc.Namn, sp.Dag, sp.Tid, b.Namn FROM scen sc INNER JOIN spelarPa sp ON sc.ScenID = sp.ScenID "
+					+ "INNER JOIN band b ON sp.BandID = b.BandID WHERE b.Namn = '"
+					+ name + "'";			
 			rs = stat.executeQuery(sql);
 			while (rs.next()) {
 				bandname = rs.getString("b.Namn");
-				stagename = rs.getString("s.Namn");
-				day = rs.getString("Dag");
+				stagename = rs.getString("sc.Namn");
+				day = rs.getString("sp.Dag");
+				time = rs.getString("sp.Tid");
+				userUI.textArea.append(bandname + " \t" + stagename + " \t" + day + " \t" + time + "\n");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(bandname + stagename + day);
+		System.out.println(bandname + stagename + day + time);
 	}
 
 	/**
@@ -287,8 +290,9 @@ public class DatabaseConnector {
 
 	public static void main(String[] args) {
 		DatabaseConnector dc = new DatabaseConnector();
+		dc.getGigSchedule("Nirvana");
 //		dc.getStageList();
-		dc.getEmployeeList();
+//		dc.getEmployeeList();
 //		dc.getTimeList("Blomsterscenen", "Torsdag");
 //		dc.getDayList("Blomsterscenen");
 //		dc.getMemberInfo("Kurt Cobain");
