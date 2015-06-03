@@ -111,5 +111,13 @@ public class AdminUIWB {
 		JComboBox comboBox_5 = new JComboBox();
 		comboBox_5.setBounds(10, 231, 159, 20);
 		frame.getContentPane().add(comboBox_5);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBounds(10, 309, 46, 14);
+		frame.getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setBounds(293, 206, 46, 14);
+		frame.getContentPane().add(lblNewLabel_3);
 	}
 }
