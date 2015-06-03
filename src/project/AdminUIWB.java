@@ -9,11 +9,25 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 
 public class AdminUIWB {
-	
-	private JButton btnNewButton = new JButton("Boka");
-
-
 	private JFrame frame;
+	private JButton btnBook = new JButton("Boka");
+	private JButton btnOK = new JButton("OK");
+	private JLabel lblBookAGig = new JLabel("Boka band och spelning");
+	private JLabel lblAddPerson = new JLabel("Lägg till kontaktperson");
+	private JLabel lblContactperson = new JLabel("Välj kontaktperson:");
+	private JLabel lblBand = new JLabel("Välj band:");
+	private JLabel lblBandForPerson = new JLabel("Välj band:");
+	private JLabel lblStage = new JLabel("Välj scen:");
+	private JLabel lblDay = new JLabel("Välj dag:");
+	private JLabel lblTime = new JLabel("Välj tid:");
+	private JLabel lblConfirmBand = new JLabel("");
+	private JLabel lblConfirmPerson = new JLabel("");
+	private JComboBox cmbBandA = new JComboBox();
+	private JComboBox cmbBandContact = new JComboBox();
+	private JComboBox cmbStage = new JComboBox();
+	private JComboBox cmbContact = new JComboBox();
+	private JComboBox cmbDay = new JComboBox();
+	private JComboBox cmbTime = new JComboBox();
 
 	/**
 	 * Launch the application.
@@ -47,77 +61,60 @@ public class AdminUIWB {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		btnNewButton.setBounds(10, 275, 89, 23);
-		frame.getContentPane().add(btnNewButton);
+		btnBook.setBounds(10, 275, 89, 23);
+		frame.getContentPane().add(btnBook);
 		
-		JButton btnOk = new JButton("OK");
-		btnOk.setBounds(293, 162, 89, 23);
-		frame.getContentPane().add(btnOk);
+		btnOK.setBounds(293, 162, 89, 23);
+		frame.getContentPane().add(btnOK);
 		
-		JLabel lblNewLabel = new JLabel("Boka band och spelning");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setBounds(10, 11, 159, 14);
-		frame.getContentPane().add(lblNewLabel);
+		lblBookAGig.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblBookAGig.setBounds(10, 11, 159, 14);
+		frame.getContentPane().add(lblBookAGig);
 		
-		JLabel lblNewLabel_1 = new JLabel("Lägg till kontaktperson");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_1.setBounds(293, 12, 159, 14);
-		frame.getContentPane().add(lblNewLabel_1);
+		lblAddPerson.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblAddPerson.setBounds(293, 12, 159, 14);
+		frame.getContentPane().add(lblAddPerson);
 		
-		JLabel lblVljBand = new JLabel("Välj band:");
-		lblVljBand.setBounds(10, 36, 89, 14);
-		frame.getContentPane().add(lblVljBand);
+		lblBand.setBounds(10, 36, 89, 14);
+		frame.getContentPane().add(lblBand);
 		
-		JLabel lblVljBand_1 = new JLabel("Välj band:");
-		lblVljBand_1.setBounds(293, 37, 89, 14);
-		frame.getContentPane().add(lblVljBand_1);
+		lblBandForPerson.setBounds(293, 37, 89, 14);
+		frame.getContentPane().add(lblBandForPerson);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(10, 61, 159, 20);
-		frame.getContentPane().add(comboBox);
+		cmbBandA.setBounds(10, 61, 159, 20);
+		frame.getContentPane().add(cmbBandA);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(293, 62, 159, 20);
-		frame.getContentPane().add(comboBox_1);
+		cmbBandContact.setBounds(293, 62, 159, 20);
+		frame.getContentPane().add(cmbBandContact);
 		
-		JLabel lblVljScen = new JLabel("Välj scen:");
-		lblVljScen.setBounds(10, 92, 46, 14);
-		frame.getContentPane().add(lblVljScen);
+		lblStage.setBounds(10, 92, 60, 14);
+		frame.getContentPane().add(lblStage);
 		
-		JLabel lblVljKontaktperson = new JLabel("Välj kontaktperson:");
-		lblVljKontaktperson.setBounds(293, 93, 159, 14);
-		frame.getContentPane().add(lblVljKontaktperson);
+		lblContactperson.setBounds(293, 93, 159, 14);
+		frame.getContentPane().add(lblContactperson);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(10, 117, 159, 20);
-		frame.getContentPane().add(comboBox_2);
+		cmbStage.setBounds(10, 117, 159, 20);
+		frame.getContentPane().add(cmbStage);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(293, 118, 159, 20);
-		frame.getContentPane().add(comboBox_3);
+		cmbContact.setBounds(293, 118, 159, 20);
+		frame.getContentPane().add(cmbContact);
 		
-		JLabel lblVljDag = new JLabel("Välj dag:");
-		lblVljDag.setBounds(10, 148, 46, 14);
-		frame.getContentPane().add(lblVljDag);
+		lblDay.setBounds(10, 148, 60, 14);
+		frame.getContentPane().add(lblDay);
 		
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(10, 175, 159, 20);
-		frame.getContentPane().add(comboBox_4);
+		cmbDay.setBounds(10, 175, 159, 20);
+		frame.getContentPane().add(cmbDay);
 		
-		JLabel lblVljTid = new JLabel("Välj tid:");
-		lblVljTid.setBounds(10, 206, 89, 14);
-		frame.getContentPane().add(lblVljTid);
+		lblTime.setBounds(10, 206, 89, 14);
+		frame.getContentPane().add(lblTime);
 		
-		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setBounds(10, 231, 159, 20);
-		frame.getContentPane().add(comboBox_5);
+		cmbTime.setBounds(10, 231, 159, 20);
+		frame.getContentPane().add(cmbTime);
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(10, 309, 46, 14);
-		frame.getContentPane().add(lblNewLabel_2);
+		lblConfirmBand.setBounds(10, 309, 46, 14);
+		frame.getContentPane().add(lblConfirmBand);
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setBounds(293, 206, 46, 14);
-		frame.getContentPane().add(lblNewLabel_3);
+		lblConfirmPerson.setBounds(293, 206, 46, 14);
+		frame.getContentPane().add(lblConfirmPerson);
 	}
 }
