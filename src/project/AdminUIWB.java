@@ -25,9 +25,10 @@ public class AdminUIWB {
 	private JLabel lblStage = new JLabel("Välj scen:");
 	private JLabel lblDay = new JLabel("Välj dag:");
 	private JLabel lblTime = new JLabel("Välj tid:");
-//	private JLabel lblConfirmBand = new JLabel("");
-//	private JLabel lblConfirmPerson = new JLabel("");
 	private JLabel lblListContact = new JLabel("Lista band och kontaktpersoner");
+	private JLabel lblConfirmBand = new JLabel("");
+	private JLabel lblConfirmPerson = new JLabel("");
+	private JLabel lblConfirmList = new JLabel("");
 	private JComboBox cmbBandA = new JComboBox();
 	private JComboBox cmbBandContact = new JComboBox();
 	private JComboBox cmbStage = new JComboBox();
@@ -118,12 +119,6 @@ public class AdminUIWB {
 		cmbTime.setBounds(10, 231, 159, 20);
 		frame.getContentPane().add(cmbTime);
 
-//		lblConfirmBand.setBounds(10, 309, 46, 14);
-//		frame.getContentPane().add(lblConfirmBand);
-//
-//		lblConfirmPerson.setBounds(293, 206, 46, 14);
-//		frame.getContentPane().add(lblConfirmPerson);
-
 		lblListContact.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblListContact.setBounds(269, 11, 207, 14);
 		frame.getContentPane().add(lblListContact);
@@ -134,6 +129,15 @@ public class AdminUIWB {
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(269, 70, 231, 420);
 		frame.getContentPane().add(textArea);
+		lblConfirmBand.setBounds(133, 279, 115, 14);
+		
+		frame.getContentPane().add(lblConfirmBand);
+		lblConfirmPerson.setBounds(123, 478, 125, 14);
+		
+		frame.getContentPane().add(lblConfirmPerson);
+		lblConfirmList.setBounds(269, 501, 125, 14);
+		
+		frame.getContentPane().add(lblConfirmList);
 	}
 
 	public void populateBandBox(LinkedList<String> s) {
