@@ -12,8 +12,6 @@ public class UserController {
 	
 	DatabaseConnector db = new DatabaseConnector();
 	UserUI2 ui ;
-	Information info = new Information();
-	
 
 	public UserController(UserUI2 userUI2) {
 		ui = userUI2;
@@ -51,10 +49,4 @@ public class UserController {
 	public void getBandList(){
 		ui.populateBandBox(db.getBandList());
 	}
-	
-	
-	
-
 }
-
-
