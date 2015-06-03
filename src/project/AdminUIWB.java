@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.util.LinkedList;
 
 import javax.swing.JComboBox;
+import javax.swing.JTextArea;
 
 public class AdminUIWB {
 	private JFrame frame;
@@ -61,14 +62,14 @@ public class AdminUIWB {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 538, 391);
+		frame.setBounds(100, 100, 538, 608);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		btnBook.setBounds(10, 275, 89, 23);
 		frame.getContentPane().add(btnBook);
 		
-		btnOK.setBounds(293, 162, 89, 23);
+		btnOK.setBounds(10, 474, 89, 23);
 		frame.getContentPane().add(btnOK);
 		
 		lblBookAGig.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -76,31 +77,31 @@ public class AdminUIWB {
 		frame.getContentPane().add(lblBookAGig);
 		
 		lblAddPerson.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblAddPerson.setBounds(293, 12, 159, 14);
+		lblAddPerson.setBounds(10, 309, 159, 14);
 		frame.getContentPane().add(lblAddPerson);
 		
 		lblBand.setBounds(10, 36, 89, 14);
 		frame.getContentPane().add(lblBand);
 		
-		lblBandForPerson.setBounds(293, 37, 89, 14);
+		lblBandForPerson.setBounds(10, 334, 89, 14);
 		frame.getContentPane().add(lblBandForPerson);
 		
 		cmbBandA.setBounds(10, 61, 159, 20);
 		frame.getContentPane().add(cmbBandA);
 		
-		cmbBandContact.setBounds(293, 62, 159, 20);
+		cmbBandContact.setBounds(10, 360, 159, 20);
 		frame.getContentPane().add(cmbBandContact);
 		
 		lblStage.setBounds(10, 92, 60, 14);
 		frame.getContentPane().add(lblStage);
 		
-		lblContactperson.setBounds(293, 93, 159, 14);
+		lblContactperson.setBounds(10, 400, 159, 14);
 		frame.getContentPane().add(lblContactperson);
 		
 		cmbStage.setBounds(10, 117, 159, 20);
 		frame.getContentPane().add(cmbStage);
 		
-		cmbContact.setBounds(293, 118, 159, 20);
+		cmbContact.setBounds(10, 429, 159, 20);
 		frame.getContentPane().add(cmbContact);
 		
 		lblDay.setBounds(10, 148, 60, 14);
@@ -120,6 +121,19 @@ public class AdminUIWB {
 		
 		lblConfirmPerson.setBounds(293, 206, 46, 14);
 		frame.getContentPane().add(lblConfirmPerson);
+		
+		JLabel lblListaKontaktperson = new JLabel("Lista band och kontaktpersoner");
+		lblListaKontaktperson.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblListaKontaktperson.setBounds(269, 11, 207, 14);
+		frame.getContentPane().add(lblListaKontaktperson);
+		
+		JButton btnSkapaLista = new JButton("Skapa lista");
+		btnSkapaLista.setBounds(269, 36, 89, 23);
+		frame.getContentPane().add(btnSkapaLista);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(269, 70, 231, 420);
+		frame.getContentPane().add(textArea);
 	}
 	
 	public void populateBandBox(LinkedList<String> s) {
@@ -177,8 +191,4 @@ public class AdminUIWB {
 		}
 
 	}
-	
-	
-	
-	
 }
