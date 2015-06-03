@@ -8,7 +8,7 @@ public class AdminController {
 	AdminUIWB ui;
 
 	public AdminController(AdminUIWB ui) {
-		ui = ui;
+		this.ui = ui;
 		db.setAdminUI(ui);
 	}
 	

@@ -11,6 +11,8 @@ import java.util.LinkedList;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminUIWB {
 	private JFrame frame;
@@ -74,9 +76,17 @@ public class AdminUIWB {
 		frame.getContentPane().setLayout(null);
 		
 		controller = new AdminController(this);
+		btnBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		btnBook.setBounds(10, 275, 100, 23);
 		frame.getContentPane().add(btnBook);
+		btnOK.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		btnOK.setBounds(10, 474, 100, 23);
 		frame.getContentPane().add(btnOK);
@@ -94,6 +104,10 @@ public class AdminUIWB {
 
 		lblBandForPerson.setBounds(10, 334, 89, 14);
 		frame.getContentPane().add(lblBandForPerson);
+		cmbBandA.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		cmbBandA.setBounds(10, 61, 159, 20);
 		frame.getContentPane().add(cmbBandA);
@@ -129,6 +143,10 @@ public class AdminUIWB {
 		lblListContact.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblListContact.setBounds(269, 11, 207, 14);
 		frame.getContentPane().add(lblListContact);
+		btnList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 
 		btnList.setBounds(269, 36, 100, 23);
 		frame.getContentPane().add(btnList);
