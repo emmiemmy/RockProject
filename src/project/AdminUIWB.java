@@ -5,7 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.util.LinkedList;
+
 import javax.swing.JComboBox;
 
 public class AdminUIWB {
@@ -28,6 +31,7 @@ public class AdminUIWB {
 	private JComboBox cmbContact = new JComboBox();
 	private JComboBox cmbDay = new JComboBox();
 	private JComboBox cmbTime = new JComboBox();
+	private String bandName, stage, day, time;
 
 	/**
 	 * Launch the application.
@@ -117,4 +121,64 @@ public class AdminUIWB {
 		lblConfirmPerson.setBounds(293, 206, 46, 14);
 		frame.getContentPane().add(lblConfirmPerson);
 	}
+	
+	public void populateBandBox(LinkedList<String> s) {
+		cmbBandA.addItem("Välj band");
+		for (String name : s) {
+			cmbBandA.addItem(name);
+
+		}
+
+	}
+	
+	public void populateStageBox(LinkedList<String> s) {
+		cmbStage.addItem("Välj scen");
+		for (String name : s) {
+			cmbStage.addItem(name);
+
+		}
+
+	}
+	
+	public void populateDayBox(LinkedList<String> s) {
+		cmbDay.addItem("Välj dag");
+		for (String name : s) {
+			cmbDay.addItem(name);
+
+		}
+
+	}
+	
+	
+	public void populateTimeBox(LinkedList<String> s) {
+		cmbTime.addItem("Välj tidpunkt");
+		for (String name : s) {
+			cmbTime.addItem(name);
+
+		}
+
+	}
+	
+	
+	public void populateBandBox2(LinkedList<String> s) {
+		cmbBandContact.addItem("Välj band");
+		for (String name : s) {
+			cmbBandContact.addItem(name);
+
+		}
+
+	}
+	
+	public void populateContactBox(LinkedList<String> s) {
+		cmbContact.addItem("Välj kontaktperson");
+		for (String name : s) {
+			cmbContact.addItem(name);
+
+		}
+
+	}
+	
+	
+	
+	
 }
