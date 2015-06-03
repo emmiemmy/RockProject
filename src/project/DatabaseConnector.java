@@ -155,6 +155,116 @@ public class DatabaseConnector {
 		}
 		return s;
 	}
+	/**
+	 * Metoden returnerar en lista på samtliga scener
+	 * @return
+	 */
+	public LinkedList<String> getStageList(){
+		LinkedList<String> s = new LinkedList<String>();
+		try {
+			conn = connectToDatabase();
+			stat = conn.createStatement();
+			String sql = "SELECT Namn FROM scen";
+			rs = stat.executeQuery(sql);
+			while (rs.next()) {
+				s.add(rs.getString("Namn"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for (String scen : s) {
+			System.out.println(scen);
+		}
+		return s;
+	}
+	/**
+	 * Metoden returnerar en lista på tillgängliga dagar för vald scen
+	 * @param stage OCH TID??????
+	 * @return
+	 */
+	public LinkedList<String> getDayList(String stage){
+		LinkedList<String> s = new LinkedList<String>();
+		try {
+			conn = connectToDatabase();
+			stat = conn.createStatement();
+			String sql = "SELECT Dag FROM spelarPa";//ANPASSA
+			rs = stat.executeQuery(sql);
+			while (rs.next()) {
+				s.add(rs.getString("Namn"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for (String dag : s) {
+			System.out.println(dag);
+		}
+		return s;
+	}
+	/**
+	 * Metoden returnerar en lista på tillgängliga tider för vald dag
+	 * @param stage
+	 * @return
+	 */
+	public LinkedList<String> getTimeList(String stage, String day){
+		LinkedList<String> s = new LinkedList<String>();
+		try {
+			conn = connectToDatabase();
+			stat = conn.createStatement();
+			String sql = "SELECT starttid, sluttid FROM spelarPa sp"
+					+ "INNER JOIN Scen sc"
+					+ "ON sp.ScenID = sc.ScenID"
+					+ " WHERE sc.Namn = '" + stage + "' "
+							+ "AND Dag = day";//MÅSTE SKRIVAS OM
+			rs = stat.executeQuery(sql);
+			while (rs.next()) {
+				s.add(rs.getString("Namn"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for (String tid : s) {
+			System.out.println(tid);
+		}
+		return s;
+	}
+	/**
+	 * Metoden returnerar en lista på alla anställda
+	 * @return
+	 */
+	public LinkedList<String> getEmployeeList(){
+		LinkedList<String> s = new LinkedList<String>();
+		try {
+			conn = connectToDatabase();
+			stat = conn.createStatement();
+			String sql = "";//MÅSTE SKRIVAS OM
+			rs = stat.executeQuery(sql);
+			while (rs.next()) {
+				s.add(rs.getString("Namn"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for (String tid : s) {
+			System.out.println(tid);
+		}
+		return s;
+	}
+	/**
+	 * Metoden skrivr ut bandnamn och respektive kontaktperson i Adminui
+	 */
+	public void getBandContactList(){
+		AdminUI.textArea.append();
+	}
+	/**
+	 * Metoden lagrar information i respektive tabell
+	 * @param bandName
+	 * @param stage
+	 * @param day
+	 * @param time
+	 */
+	public void insertBooking(String bandName,String stage ,String day,String time){
+		
+	}
 
 	public static void main(String[] args) {
 		DatabaseConnector databaseConnector = new DatabaseConnector();
