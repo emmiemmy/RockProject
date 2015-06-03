@@ -25,8 +25,8 @@ public class UserUI2 {
 	private JButton btnShowSchedule = new JButton("Hämta spelschema");
 
 	JTextArea textArea = new JTextArea();
-	JComboBox<String> combo_box_medlem = new JComboBox<String>();
-	JComboBox<String> combo_box_band = new JComboBox<String>();
+	JComboBox<String> cmbMedlem = new JComboBox<String>();
+	JComboBox<String> cmbBand = new JComboBox<String>();
 
 	JFrame frame;
 
@@ -64,10 +64,10 @@ public class UserUI2 {
 
 		controller = new UserController(this);
 
-		combo_box_band.setBounds(6, 54, 190, 27);
+		cmbBand.setBounds(6, 54, 190, 27);
 
-		frame.getContentPane().add(combo_box_band);
-		combo_box_band.addActionListener(new ComboBox());
+		frame.getContentPane().add(cmbBand);
+		cmbBand.addActionListener(new ComboBox());
 		controller.getBandList();// fyller i listan med band som finns i DB
 
 		textArea.setBounds(215, 20, 367, 357);
@@ -77,28 +77,28 @@ public class UserUI2 {
 		btnClear.setBounds(0, 350, 135, 27);
 		frame.getContentPane().add(btnClear);
 
-		combo_box_medlem.setBounds(6, 93, 190, 27);
-		frame.getContentPane().add(combo_box_medlem);
+		cmbMedlem.setBounds(6, 93, 190, 27);
+		frame.getContentPane().add(cmbMedlem);
 		btnShowSchedule.setBounds(6, 147, 129, 27);
 		btnShowSchedule.addActionListener(new ButtonListener());
 
 		frame.getContentPane().add(btnShowSchedule);
-		combo_box_medlem.addActionListener(new ComboBox_medlem());
+		cmbMedlem.addActionListener(new ComboBox_medlem());
 	}
 
 	public void populateBandBox(LinkedList<String> s) {
-		combo_box_band.addItem("Välj band");
+		cmbBand.addItem("Välj band");
 		for (String name : s) {
-			combo_box_band.addItem(name);
+			cmbBand.addItem(name);
 
 		}
 
 	}
 
 	public void populateMemberBox(LinkedList<String> s) {
-		combo_box_medlem.addItem("Medlemmar");
+		cmbMedlem.addItem("Medlemmar");
 		for (String name : s) {
-			combo_box_medlem.addItem(name);
+			cmbMedlem.addItem(name);
 		}
 
 	}
@@ -118,8 +118,8 @@ public class UserUI2 {
 			if (!choice.equals("Välj band")) {
 				LinkedList<String> s = new LinkedList<String>();
 				controller.getBandInfo(choice);
-				combo_box_band.setEnabled(false);
-				combo_box_medlem.setEnabled(true);
+				cmbBand.setEnabled(false);
+				cmbMedlem.setEnabled(true);
 
 			}
 
@@ -154,11 +154,11 @@ public class UserUI2 {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnClear) {
 				textArea.setText("");
-				combo_box_band.setSelectedIndex(0);
+				cmbBand.setSelectedIndex(0);
 				// combo_box_medlem.setSelectedIndex(0);
-				combo_box_band.setEnabled(true);
-				combo_box_medlem.setEnabled(false);
-				combo_box_medlem.removeAllItems();
+				cmbBand.setEnabled(true);
+				cmbMedlem.setEnabled(false);
+				cmbMedlem.removeAllItems();
 
 			}
 
