@@ -36,6 +36,10 @@ public class AdminUIWB {
 	private JComboBox cmbDay = new JComboBox();
 	private JComboBox cmbTime = new JComboBox();
 	private String bandName, stage, day, time;
+	private JTextArea textArea = new JTextArea();
+
+	
+	AdminController controller;
 
 	/**
 	 * Launch the application.
@@ -68,6 +72,8 @@ public class AdminUIWB {
 		frame.setBounds(100, 100, 538, 590);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		controller = new AdminController(this);
 
 		btnBook.setBounds(10, 275, 100, 23);
 		frame.getContentPane().add(btnBook);
@@ -91,6 +97,7 @@ public class AdminUIWB {
 
 		cmbBandA.setBounds(10, 61, 159, 20);
 		frame.getContentPane().add(cmbBandA);
+		controller.getBandList();
 
 		cmbBandContact.setBounds(10, 360, 159, 20);
 		frame.getContentPane().add(cmbBandContact);
@@ -126,7 +133,6 @@ public class AdminUIWB {
 		btnList.setBounds(269, 36, 100, 23);
 		frame.getContentPane().add(btnList);
 
-		JTextArea textArea = new JTextArea();
 		textArea.setBounds(269, 70, 231, 420);
 		frame.getContentPane().add(textArea);
 		lblConfirmBand.setBounds(133, 279, 115, 14);
