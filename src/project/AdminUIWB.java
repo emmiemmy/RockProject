@@ -47,7 +47,7 @@ public class AdminUIWB {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		btnNewButton.setBounds(10, 306, 89, 23);
+		btnNewButton.setBounds(10, 275, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnOk = new JButton("OK");
@@ -95,5 +95,21 @@ public class AdminUIWB {
 		JComboBox comboBox_3 = new JComboBox();
 		comboBox_3.setBounds(293, 118, 159, 20);
 		frame.getContentPane().add(comboBox_3);
+		
+		JLabel lblVljDag = new JLabel("Välj dag:");
+		lblVljDag.setBounds(10, 148, 46, 14);
+		frame.getContentPane().add(lblVljDag);
+		
+		JComboBox comboBox_4 = new JComboBox();
+		comboBox_4.setBounds(10, 175, 159, 20);
+		frame.getContentPane().add(comboBox_4);
+		
+		JLabel lblVljTid = new JLabel("Välj tid:");
+		lblVljTid.setBounds(10, 206, 89, 14);
+		frame.getContentPane().add(lblVljTid);
+		
+		JComboBox comboBox_5 = new JComboBox();
+		comboBox_5.setBounds(10, 231, 159, 20);
+		frame.getContentPane().add(comboBox_5);
 	}
 }
