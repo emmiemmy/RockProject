@@ -112,6 +112,10 @@ public class AdminUIWB {
 		cmbBandA.setBounds(10, 61, 159, 20);
 		frame.getContentPane().add(cmbBandA);
 		controller.getBandList();
+		cmbBandContact.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		cmbBandContact.setBounds(10, 360, 159, 20);
 		frame.getContentPane().add(cmbBandContact);
@@ -121,21 +125,37 @@ public class AdminUIWB {
 
 		lblContactperson.setBounds(10, 400, 159, 14);
 		frame.getContentPane().add(lblContactperson);
+		cmbStage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		cmbStage.setBounds(10, 117, 159, 20);
 		frame.getContentPane().add(cmbStage);
+		cmbContact.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		cmbContact.setBounds(10, 429, 159, 20);
 		frame.getContentPane().add(cmbContact);
 
 		lblDay.setBounds(10, 148, 60, 14);
 		frame.getContentPane().add(lblDay);
+		cmbDay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		cmbDay.setBounds(10, 175, 159, 20);
 		frame.getContentPane().add(cmbDay);
 
 		lblTime.setBounds(10, 206, 89, 14);
 		frame.getContentPane().add(lblTime);
+		cmbTime.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		cmbTime.setBounds(10, 231, 159, 20);
 		frame.getContentPane().add(cmbTime);
