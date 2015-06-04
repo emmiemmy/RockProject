@@ -18,6 +18,7 @@ public class DatabaseConnector {
 	private AdminController adminController;
 	private UserUI2 userUI;
 	private AdminUIWB adminUI;
+	private int i = 19;
 
 	public void setControllers(UserController uc, AdminController ac) {
 		userController = uc;
@@ -389,13 +390,14 @@ public class DatabaseConnector {
 			conn.setAutoCommit(false);
 
 			stat = conn.createStatement();
-		String sql = "INSERT INTO band(Namn, Musikstil, Ursprungsland) "
-				+ "VALUES('" + bandname + "', '" + genre + "', '" + country + "')";
+		String sql = "INSERT INTO band(BandID, Namn, Musikstil, Ursprungsland) "
+				+ "VALUES('" + i + "', '" + bandname + "', '" + genre + "', '" + country + "')";
 		
+		i++;
 		stat.executeUpdate(sql);
 		conn.commit();
 		stat.close();
-		System.out.println(bandname + " "+ genre + " " + country);
+		System.out.println(i + " " + bandname + " "+ genre + " " + country);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -403,7 +405,8 @@ public class DatabaseConnector {
 
 	public static void main(String[] args) {
 		DatabaseConnector dc = new DatabaseConnector();
-		dc.insertBand("Java", "Hårdrock", "Sverige");
+//		dc.insertBand("Emma Shaky-Shaky", "Hårdrock", "Sverige");
+//		dc.insertBand("Evy And The Hell dogs", "Hårdrock", "Sverige");
 //		dc.insertContactForBand("Pink Floyd", "Kalle Kula");
 //		 dc.insertBooking("No Doubt", "Dieselfabriken", "Fredag", "23:00-01:00");
 		// dc.getGigSchedule("Nirvana");
