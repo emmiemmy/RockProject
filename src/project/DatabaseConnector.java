@@ -323,7 +323,7 @@ public class DatabaseConnector {
 			stat.executeUpdate(sql2);
 			conn.commit();
 			stat.close();
-			adminUI.lblConfirmBand.setText("Bokning genomförd.");
+			adminUI.lblConfirmBand.setText("Bokat!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -375,7 +375,7 @@ public class DatabaseConnector {
 			stat.executeUpdate(sql2);
 			conn.commit();
 			stat.close();
-			adminUI.lblConfirmPerson.setText("Kontaktperson tillagd.");
+			adminUI.lblConfirmPerson.setText("Fixat!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
