@@ -17,7 +17,9 @@ public class AdminController {
 	 */
 	public void getBandList(){
 		LinkedList<String> s = new LinkedList<String>();
-		ui.populateBandBox(db.getBandList());
+		s = db.getBandList();
+		ui.populateBandBox(s);
+		ui.populateBandBox2(s);
 	}
 	
 	/**
@@ -58,6 +60,19 @@ public class AdminController {
 	public void insertBooking(String bandName, String stage, String day, String time){
 		db.insertBooking(bandName, stage, day, time);//Insert information i respektive tabeller
 		//IMPLEMENTERA DB METOD
+	}
+	/**
+	 * Returnerar en lista på band och dess kontaktpersoner
+	 */
+	public void getBandContactList(){
+		
+	}
+	/**
+	 * Delegera anställs som kontaktperson till band
+	 * @param employee
+	 */
+	public void insertContact(String employee){
+		
 	}
 	
 	
