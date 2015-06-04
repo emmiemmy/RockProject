@@ -21,8 +21,9 @@ public class NewBand extends JPanel{
 	private JTextField tfBandName;
 	private JTextField tfCountry;
 	private JTextField tfType;
-	private JTextField tfMember;
 	AdminController controller;
+	private JTextField tfParty;
+	private JTextField tfMedlem;
 	
 	public NewBand(AdminController controller){
 		setPreferredSize(new Dimension(274, 332));
@@ -68,22 +69,35 @@ public class NewBand extends JPanel{
 		JButton btnAddMember = new JButton("Lägg till medlem");
 		btnAddMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				controller.insertBandMember(tfBandName.getText(), tfMedlem.getText(), tfParty.getText());
 			}
 		});
-		btnAddMember.setBounds(94, 224, 149, 28);
+		btnAddMember.setBounds(94, 271, 149, 28);
 		add(btnAddMember);
 		
-		tfMember = new JTextField();
-		tfMember.setBounds(94, 184, 149, 28);
-		add(tfMember);
-		tfMember.setColumns(10);	
+		JLabel lblParty = new JLabel("Partytrick");
+		lblParty.setBounds(16, 190, 83, 16);
+		add(lblParty);
+		
+		JLabel lblMedlem = new JLabel("Medlem:");
+		lblMedlem.setBounds(16, 230, 83, 16);
+		add(lblMedlem);
+		
+		tfParty = new JTextField();
+		tfParty.setBounds(94, 184, 149, 28);
+		add(tfParty);
+		tfParty.setColumns(10);
+		
+		tfMedlem = new JTextField();
+		tfMedlem.setColumns(10);
+		tfMedlem.setBounds(94, 224, 149, 28);
+		add(tfMedlem);
 
 	}
 	
 //	public static void main(String[] args){
 //		JFrame frame = new JFrame();
-//		frame.getContentPane().add(new NewBand());
+//		frame.getContentPane().add(new NewBand(new AdminController()));
 //		frame.pack();
 //		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		frame.setVisible(true);		

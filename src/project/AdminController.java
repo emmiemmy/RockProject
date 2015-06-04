@@ -82,7 +82,9 @@ public class AdminController {
 		db.insertBand(band, genre, country);
 	}
 	
-	public void insertBandMember(String band, String member){
-		db.insertBandMember(band, member);
+	public void insertBandMember(String band, String member, String party){
+		System.out.println("Controller: insertBandMember():" + band + member + party);
+
+		db.insertBandMember(band, member, party );
 	}
 }
