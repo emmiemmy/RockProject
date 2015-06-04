@@ -30,7 +30,7 @@ public class AdminUIWB {
 	private JLabel lblTime = new JLabel("Välj tid:");
 	private JLabel lblListContact = new JLabel("Lista band och kontaktpersoner");
 	JLabel lblConfirmBand = new JLabel("");
-	private JLabel lblConfirmPerson = new JLabel("");
+	JLabel lblConfirmPerson = new JLabel("");
 	private JLabel lblConfirmList = new JLabel("");
 	private JComboBox cmbBandA = new JComboBox();
 	private JComboBox cmbBandContact = new JComboBox();

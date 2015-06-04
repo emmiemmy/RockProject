@@ -120,14 +120,15 @@ public class DatabaseConnector {
 			stat = conn.createStatement();
 			String sql = "SELECT sc.Namn, sp.Dag, sp.Tid, b.Namn FROM scen sc INNER JOIN spelarPa sp ON sc.ScenID = sp.ScenID "
 					+ "INNER JOIN band b ON sp.BandID = b.BandID WHERE b.Namn = '"
-					+ name + "'";			
+					+ name + "'";
 			rs = stat.executeQuery(sql);
 			while (rs.next()) {
 				bandname = rs.getString("b.Namn");
 				stagename = rs.getString("sc.Namn");
 				day = rs.getString("sp.Dag");
 				time = rs.getString("sp.Tid");
-				userUI.textArea.append("\n" + bandname + "\t" + stagename + "\t" + day + "\t" + time + "\n");
+				userUI.textArea.append("\n" + bandname + "\t" + stagename
+						+ "\t" + day + "\t" + time + "\n");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -284,46 +285,41 @@ public class DatabaseConnector {
 	 * @param time
 	 */
 	public void insertBooking(String bandName, String stage, String day,
-			String time) {	
+			String time) {
 		int bandID = 0;
 		int stageID = 0;
 		try {
 			conn = connectToDatabase();
 			conn.setAutoCommit(false);
-			
+
 			stat = conn.createStatement();
-			String sql = "SELECT BandID "
-					+ "FROM band "
-					+ "WHERE Namn = '"
+			String sql = "SELECT BandID " + "FROM band " + "WHERE Namn = '"
 					+ bandName + "'";
-			
+
 			rs = stat.executeQuery(sql);
-			
+
 			while (rs.next()) {
 				bandID = rs.getInt("BandID");
 				System.out.println(bandID);
 			}
 			stat.close();
-			
+
 			stat = conn.createStatement();
-			String sql1 = "SELECT ScenID "
-					+ "FROM scen "
-					+ "WHERE Namn = '" + stage + "'";
-			
+			String sql1 = "SELECT ScenID " + "FROM scen " + "WHERE Namn = '"
+					+ stage + "'";
+
 			rs = stat.executeQuery(sql1);
-			
+
 			while (rs.next()) {
 				stageID = rs.getInt("ScenID");
 				System.out.println(stageID);
 			}
 			stat.close();
-			
+
 			stat = conn.createStatement();
-			String sql2 = "UPDATE spelarPa "
-					+ "SET BandID = '" + bandID + "'"
-							+ "WHERE ScenID = '" + stageID + "' AND "
-									+ "Tid = '" + time + "' AND "
-											+ "Dag = '" + day + "'";
+			String sql2 = "UPDATE spelarPa " + "SET BandID = '" + bandID + "'"
+					+ "WHERE ScenID = '" + stageID + "' AND " + "Tid = '"
+					+ time + "' AND " + "Dag = '" + day + "'";
 			stat.executeUpdate(sql2);
 			conn.commit();
 			stat.close();
@@ -332,18 +328,72 @@ public class DatabaseConnector {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Lägger till kontaktperson för band.
+	 * 
+	 * @param band
+	 * @param employee
+	 */
+	public void insertContactForBand(String band, String employee) {
+		int employeeID = 0;
+		int bandID = 0;
+
+		try {
+			conn = connectToDatabase();
+			conn.setAutoCommit(false);
+
+			stat = conn.createStatement();
+			String sql = "SELECT AnstID "
+					+ "FROM anstalld "
+					+ "WHERE Namn = '"
+					+ employee + "'";
+
+			rs = stat.executeQuery(sql);
+
+			while (rs.next()) {
+				employeeID = rs.getInt("AnstID");
+				System.out.println(employeeID);
+			}
+			stat.close();
+
+			stat = conn.createStatement();
+			String sql1 = "SELECT BandID " + "FROM band " + "WHERE Namn = '"
+					+ band + "'";
+
+			rs = stat.executeQuery(sql1);
+
+			while (rs.next()) {
+				bandID = rs.getInt("BandID");
+				System.out.println(bandID);
+			}
+			stat.close();
+
+			stat = conn.createStatement();
+			String sql2 = "UPDATE band " + "SET KontaktpersonID = '"
+					+ employeeID + "'" + "WHERE BandID = '" + bandID + "'";
+			stat.executeUpdate(sql2);
+			conn.commit();
+			stat.close();
+			adminUI.lblConfirmPerson.setText("Kontaktperson tillagd.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args) {
 		DatabaseConnector dc = new DatabaseConnector();
-		dc.insertBooking("No Doubt", "Dieselfabriken", "Fredag", "23:00-01:00");
-//		dc.getGigSchedule("Nirvana");
-	//	dc.getGigSchedule("Nirvana");
-//		dc.getStageList();
-//		dc.getEmployeeList();
-//		dc.getTimeList("Blomsterscenen", "Torsdag");
-//		dc.getDayList("Blomsterscenen");
-//		dc.getMemberInfo("Kurt Cobain");
-//		dc.getBandInfo("Nirvana");
-//		dc.getBandList();
+		dc.insertContactForBand("Slipknot", "Stacy Månfare");
+		// dc.insertBooking("No Doubt", "Dieselfabriken", "Fredag",
+		// "23:00-01:00");
+		// dc.getGigSchedule("Nirvana");
+		// dc.getGigSchedule("Nirvana");
+		// dc.getStageList();
+		// dc.getEmployeeList();
+		// dc.getTimeList("Blomsterscenen", "Torsdag");
+		// dc.getDayList("Blomsterscenen");
+		// dc.getMemberInfo("Kurt Cobain");
+		// dc.getBandInfo("Nirvana");
+		// dc.getBandList();
 	}
 }
