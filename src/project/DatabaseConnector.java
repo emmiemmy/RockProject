@@ -402,9 +402,43 @@ public class DatabaseConnector {
 			e.printStackTrace();
 		}	
 	}
+	
+	public void insertBandMember(String bandname, String membername, String partytrick) {
+		int bandID = 0;
+		try {
+			conn = connectToDatabase();
+			conn.setAutoCommit(false);
+			
+			stat = conn.createStatement();
+			String sql = "SELECT BandID "
+					+ "FROM band "
+					+ "WHERE Namn = '" + bandname + "'";
+			
+			rs = stat.executeQuery(sql);
+			
+			while (rs.next()) {
+				bandID = rs.getInt("BandID");
+				System.out.println(bandID);
+			}
+			stat.close();
+			
+			stat = conn.createStatement();
+		String sql1 = "INSERT INTO medlem(Namn, BandID, Partytrick) "
+				+ "VALUES('" + membername + "', '" + bandID + "', '" + partytrick + "')";
+		
+		System.out.println(bandname + " " + bandID);
+
+		stat.executeUpdate(sql1);
+		conn.commit();
+		stat.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
 		DatabaseConnector dc = new DatabaseConnector();
+		dc.insertBandMember("Emma Shaky-Shaky", "Emma", "Headbanga");
 //		dc.insertBand("Emma Shaky-Shaky", "Hårdrock", "Sverige");
 //		dc.insertBand("Evy And The Hell dogs", "Hårdrock", "Sverige");
 //		dc.insertContactForBand("Pink Floyd", "Kalle Kula");
