@@ -208,7 +208,7 @@ public class AdminUIWB {
 		
 		btnList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controller.getBandContactList(employee);
+				controller.getBandContactList();
 			}
 		});
 
