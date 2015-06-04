@@ -284,11 +284,88 @@ public class DatabaseConnector {
 	 * @param time
 	 */
 	public void insertBooking(String bandName, String stage, String day,
-			String time) {
+			String time) {	
+		int bandID = 0;
+		int stageID = 0;
+		try {
+			conn = connectToDatabase();
+			conn.setAutoCommit(false);
+			
+			stat = conn.createStatement();
+			String sql = "SELECT BandID "
+					+ "FROM band "
+					+ "WHERE Namn = '"
+					+ bandName + "'";
+			
+			rs = stat.executeQuery(sql);
+			
+			while (rs.next()) {
+				bandID = rs.getInt("BandID");
+				System.out.println(bandID);
+			}
+			stat.close();
+			
+			stat = conn.createStatement();
+			String sql1 = "SELECT ScenID "
+					+ "FROM scen "
+					+ "WHERE Namn = '" + stage + "'";
+			
+			rs = stat.executeQuery(sql1);
+			
+			while (rs.next()) {
+				stageID = rs.getInt("ScenID");
+				System.out.println(stageID);
+			}
+			stat.close();
+			
+			stat = conn.createStatement();
+			String sql2 = "INSERT INTO spelarPa (BandID) "
+					+ "VALUES ('" + bandID + "') "
+							+ "WHERE ScenID = '" + stageID + "' AND "
+									+ "Tid = '" + time + "' AND "
+											+ "Dag = '" + day + "'";
+			stat.executeUpdate(sql2);
+			conn.commit();
+			stat.close();
+			
+			// EFTER ALLA...
+//			conn.commit();
+//			stat.close();
+//			rs = stat.executeQuery(sql1);
+			
+//			FUNKAR EJ	
+//			String sql1 = "SELECT b.BandID, s.ScenID "
+//			+ "FROM spelarPa sp "
+//			+ "INNER JOIN band b "
+//			+ "ON sp.BandID = b.BandID "
+//			+ "INNER JOIN scen s "
+//			+ "ON sp.ScenID = s.ScenID "
+//			+ "WHERE b.Namn = '" + bandName + "'"
+//					+ "AND s.Namn = '" + stage + "'";
+			
+//			String sql1 = "SELECT sp.BandID "
+//					+ "FROM spelarPa sp "
+//					+ "INNER JOIN band b "
+//					+ "ON sp.BandID = b.BandID "
+//					+ "INNER JOIN scen s "
+//					+ "ON sp.ScenID = s.ScenID "
+//					+ "WHERE b.Namn = '" + bandName + "'";
+			
+//			while (rs.next()) {
+//				bandName = rs.getString("Namn");
+//				stage = rs.getString("s.Namn");
+//				day = rs.getString("sp.Dag");
+//				time = rs.getString("sp.Tid");	
+//			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
+	
 	public static void main(String[] args) {
 		DatabaseConnector dc = new DatabaseConnector();
+		dc.insertBooking("Metallica", "Dieselfabriken", "Lördag", "23:00-01:00");
+//		dc.getGigSchedule("Nirvana");
 	//	dc.getGigSchedule("Nirvana");
 //		dc.getStageList();
 //		dc.getEmployeeList();
