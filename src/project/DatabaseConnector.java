@@ -366,10 +366,11 @@ public class DatabaseConnector {
 		DatabaseConnector dc = new DatabaseConnector();
 		dc.insertBooking("Metallica", "Dieselfabriken", "Lördag", "23:00-01:00");
 //		dc.getGigSchedule("Nirvana");
+	//	dc.getGigSchedule("Nirvana");
 //		dc.getStageList();
 //		dc.getEmployeeList();
 //		dc.getTimeList("Blomsterscenen", "Torsdag");
-//		dc.getDayList("Blomsterscenen");
+		dc.getDayList("Blomsterscenen");
 //		dc.getMemberInfo("Kurt Cobain");
 //		dc.getBandInfo("Nirvana");
 //		dc.getBandList();
