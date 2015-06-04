@@ -31,7 +31,6 @@ public class AdminUIWB {
 	private JLabel lblListContact = new JLabel("Lista band och kontaktpersoner");
 	JLabel lblConfirmBand = new JLabel("");
 	JLabel lblConfirmPerson = new JLabel("");
-	private JLabel lblConfirmList = new JLabel("");
 	private JComboBox cmbBandA = new JComboBox();
 	private JComboBox cmbBandContact = new JComboBox();
 	private JComboBox cmbStage = new JComboBox();
@@ -42,6 +41,7 @@ public class AdminUIWB {
 	JTextArea textArea = new JTextArea();
 
 	AdminController controller;
+	private final JButton btnClear = new JButton("Rensa");
 
 	/**
 	 * Launch the application.
@@ -229,9 +229,24 @@ public class AdminUIWB {
 		lblConfirmPerson.setBounds(123, 478, 125, 14);
 
 		frame.getContentPane().add(lblConfirmPerson);
-		lblConfirmList.setBounds(269, 501, 125, 14);
-
-		frame.getContentPane().add(lblConfirmList);
+		
+		JButton btnEraseLabels = new JButton("Lägg till ny");
+		btnEraseLabels.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblConfirmBand.setText("");
+				lblConfirmPerson.setText("");
+			}
+		});
+		btnEraseLabels.setBounds(10, 508, 100, 23);
+		frame.getContentPane().add(btnEraseLabels);
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textArea.setText("");
+			}
+		});
+		btnClear.setBounds(269, 508, 100, 23);
+		
+		frame.getContentPane().add(btnClear);
 	}
 
 	public void populateBandBox(LinkedList<String> s) {
