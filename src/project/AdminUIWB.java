@@ -38,7 +38,7 @@ public class AdminUIWB {
 	private JComboBox cmbContact = new JComboBox();
 	private JComboBox cmbDay = new JComboBox();
 	private JComboBox cmbTime = new JComboBox();
-	private String bandName, stage, day, time, employee;
+	private String bandName, stage, day, time, employee, bandNameContact;
 	JTextArea textArea = new JTextArea();
 
 	AdminController controller;
@@ -90,7 +90,7 @@ public class AdminUIWB {
 
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.insertContact(employee);//SKAPA METOD I CONTROLLER OCH DB
+				controller.insertContact(employee, bandNameContact);//SKAPA METOD I CONTROLLER OCH DB
 			}
 		});
 
@@ -130,7 +130,7 @@ public class AdminUIWB {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
 				String choice = (String) cb.getSelectedItem();
-				bandName = choice;
+				bandNameContact = choice;
 				controller.getEmployeesList();
 			}
 		});
@@ -205,7 +205,9 @@ public class AdminUIWB {
 		lblListContact.setBounds(269, 11, 207, 14);
 		frame.getContentPane().add(lblListContact);
 		
-		
+		/** 
+		 * Knapp som hämtar 
+		 */
 		btnList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.getBandContactList();
