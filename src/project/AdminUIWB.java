@@ -90,6 +90,7 @@ public class AdminUIWB {
 
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.insertContact(employee);//SKAPA METOD I CONTROLLER OCH DB
 			}
 		});
 
@@ -207,6 +208,7 @@ public class AdminUIWB {
 		
 		btnList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				controller.getBandContactList(employee);
 			}
 		});
 
