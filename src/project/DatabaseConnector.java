@@ -255,7 +255,8 @@ public class DatabaseConnector {
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
-			String sql = "SELECT Namn FROM anstalld";
+			String sql = "SELECT Namn FROM anstalld "
+					+ "WHERE Arbetsuppgift = 'Kontaktperson'";
 			rs = stat.executeQuery(sql);
 			while (rs.next()) {
 				s.add(rs.getString("Namn"));
@@ -347,7 +348,8 @@ public class DatabaseConnector {
 			String sql = "SELECT AnstID "
 					+ "FROM anstalld "
 					+ "WHERE Namn = '"
-					+ employee + "'";
+					+ employee + "'"
+							+ "AND Arbetsuppgift = 'Kontaktperson'";
 
 			rs = stat.executeQuery(sql);
 
@@ -383,8 +385,8 @@ public class DatabaseConnector {
 
 	public static void main(String[] args) {
 		DatabaseConnector dc = new DatabaseConnector();
-//		dc.insertContactForBand("Pink Floyd", "Kajsa Kula");
-		 dc.insertBooking("No Doubt", "Dieselfabriken", "Fredag", "23:00-01:00");
+		dc.insertContactForBand("Pink Floyd", "Kalle Kula");
+//		 dc.insertBooking("No Doubt", "Dieselfabriken", "Fredag", "23:00-01:00");
 		// dc.getGigSchedule("Nirvana");
 		// dc.getGigSchedule("Nirvana");
 		// dc.getStageList();
