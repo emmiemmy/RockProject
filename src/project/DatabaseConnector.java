@@ -375,7 +375,7 @@ public class DatabaseConnector {
 			stat.executeUpdate(sql2);
 			conn.commit();
 			stat.close();
-//			adminUI.lblConfirmPerson.setText("Fixat!");
+			adminUI.lblConfirmPerson.setText("Fixat!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -383,9 +383,8 @@ public class DatabaseConnector {
 
 	public static void main(String[] args) {
 		DatabaseConnector dc = new DatabaseConnector();
-		dc.insertContactForBand("Pink Floyd", "Kajsa Kula");
-		// dc.insertBooking("No Doubt", "Dieselfabriken", "Fredag",
-		// "23:00-01:00");
+//		dc.insertContactForBand("Pink Floyd", "Kajsa Kula");
+		 dc.insertBooking("No Doubt", "Dieselfabriken", "Fredag", "23:00-01:00");
 		// dc.getGigSchedule("Nirvana");
 		// dc.getGigSchedule("Nirvana");
 		// dc.getStageList();
