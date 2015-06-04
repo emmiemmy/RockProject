@@ -90,7 +90,7 @@ public class AdminUIWB {
 
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.insertContact(employee, bandNameContact);// SKAPA
+				controller.insertContact(bandNameContact, employee);// SKAPA
 																	// METOD I
 																	// CONTROLLER
 																	// OCH DB

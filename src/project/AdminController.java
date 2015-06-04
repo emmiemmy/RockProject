@@ -67,7 +67,7 @@ public class AdminController {
 	 * Ber DB hämta en lista på band och dess kontaktpersoner
 	 */
 	public void getBandContactList(){
-		db.getBandAndContacts();//MÅSTE IMPLEMENTERAS I DATABASEN
+//		db.getBandAndContacts();//MÅSTE IMPLEMENTERAS I DATABASEN
 	}
 	/**
 	 * Delegera anställs som kontaktperson till band
@@ -76,7 +76,4 @@ public class AdminController {
 	public void insertContact(String employee, String bandName){
 		db.insertContactForBand(employee, bandName);//MÅSTE IMPLEMENTERAS I DB
 	}
-	
-	
-
 }
