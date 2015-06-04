@@ -382,10 +382,29 @@ public class DatabaseConnector {
 			e.printStackTrace();
 		}
 	}
+	
+	public void insertBand(String bandname, String genre, String country) {
+		try {
+			conn = connectToDatabase();
+			conn.setAutoCommit(false);
+
+			stat = conn.createStatement();
+		String sql = "INSERT INTO band(Namn, Musikstil, Ursprungsland) "
+				+ "VALUES('" + bandname + "', '" + genre + "', '" + country + "')";
+		
+		stat.executeUpdate(sql);
+		conn.commit();
+		stat.close();
+		System.out.println(bandname + " "+ genre + " " + country);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}
 
 	public static void main(String[] args) {
 		DatabaseConnector dc = new DatabaseConnector();
-		dc.insertContactForBand("Pink Floyd", "Kalle Kula");
+		dc.insertBand("Java", "Hårdrock", "Sverige");
+//		dc.insertContactForBand("Pink Floyd", "Kalle Kula");
 //		 dc.insertBooking("No Doubt", "Dieselfabriken", "Fredag", "23:00-01:00");
 		// dc.getGigSchedule("Nirvana");
 		// dc.getGigSchedule("Nirvana");
