@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -37,10 +38,9 @@ public class AdminUIWB {
 	private JComboBox cmbContact = new JComboBox();
 	private JComboBox cmbDay = new JComboBox();
 	private JComboBox cmbTime = new JComboBox();
-	private String bandName, stage, day, time;
+	private String bandName, stage, day, time, employee;
 	JTextArea textArea = new JTextArea();
 
-	
 	AdminController controller;
 
 	/**
@@ -74,15 +74,20 @@ public class AdminUIWB {
 		frame.setBounds(100, 100, 538, 590);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		controller = new AdminController(this);
+
 		btnBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.insertBooking(bandName, stage, day, time);
+				System.out.println("INSERT INTO DB : " + bandName + " " + 
+				stage+ " " + day + " " + time);
 			}
 		});
 
 		btnBook.setBounds(10, 275, 100, 23);
 		frame.getContentPane().add(btnBook);
+
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -104,16 +109,28 @@ public class AdminUIWB {
 
 		lblBandForPerson.setBounds(10, 334, 89, 14);
 		frame.getContentPane().add(lblBandForPerson);
+		
 		cmbBandA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox) e.getSource();
+				String choice = (String) cb.getSelectedItem();
+				bandName = choice;
+				if (!choice.equals("Välj band"))
+				controller.getStageList();
+
 			}
 		});
 
 		cmbBandA.setBounds(10, 61, 159, 20);
 		frame.getContentPane().add(cmbBandA);
 		controller.getBandList();
+		
 		cmbBandContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox) e.getSource();
+				String choice = (String) cb.getSelectedItem();
+				bandName = choice;
+				controller.getEmployeesList();
 			}
 		});
 
@@ -125,15 +142,25 @@ public class AdminUIWB {
 
 		lblContactperson.setBounds(10, 400, 159, 14);
 		frame.getContentPane().add(lblContactperson);
+		
 		cmbStage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox) e.getSource();
+				String choice = (String) cb.getSelectedItem();
+				stage = choice;
+				if (!choice.equals("Välj scen"))
+					controller.getStageAvailDay(stage);
 			}
 		});
 
 		cmbStage.setBounds(10, 117, 159, 20);
 		frame.getContentPane().add(cmbStage);
+		
 		cmbContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox) e.getSource();
+				String choice = (String) cb.getSelectedItem();
+				employee = choice;
 			}
 		});
 
@@ -142,8 +169,15 @@ public class AdminUIWB {
 
 		lblDay.setBounds(10, 148, 60, 14);
 		frame.getContentPane().add(lblDay);
+		
+		
 		cmbDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox) e.getSource();
+				String choice = (String) cb.getSelectedItem();
+				day = choice;
+				System.out.println(day);
+					controller.getStageAvailTime(stage, day);
 			}
 		});
 
@@ -152,8 +186,14 @@ public class AdminUIWB {
 
 		lblTime.setBounds(10, 206, 89, 14);
 		frame.getContentPane().add(lblTime);
+		
+		
 		cmbTime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox) e.getSource();
+				String choice = (String) cb.getSelectedItem();
+				time = choice;
+				
 			}
 		});
 
@@ -163,6 +203,8 @@ public class AdminUIWB {
 		lblListContact.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblListContact.setBounds(269, 11, 207, 14);
 		frame.getContentPane().add(lblListContact);
+		
+		
 		btnList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -174,17 +216,19 @@ public class AdminUIWB {
 		textArea.setBounds(269, 70, 231, 420);
 		frame.getContentPane().add(textArea);
 		lblConfirmBand.setBounds(133, 279, 115, 14);
-		
+
 		frame.getContentPane().add(lblConfirmBand);
 		lblConfirmPerson.setBounds(123, 478, 125, 14);
-		
+
 		frame.getContentPane().add(lblConfirmPerson);
 		lblConfirmList.setBounds(269, 501, 125, 14);
-		
+
 		frame.getContentPane().add(lblConfirmList);
 	}
 
 	public void populateBandBox(LinkedList<String> s) {
+		cmbBandA.removeAllItems();
+
 		cmbBandA.addItem("Välj band");
 		for (String name : s) {
 			cmbBandA.addItem(name);
@@ -192,6 +236,9 @@ public class AdminUIWB {
 	}
 
 	public void populateStageBox(LinkedList<String> s) {
+		System.out.println("Adminui: populateStageBox()");
+		cmbStage.removeAllItems();
+
 		cmbStage.addItem("Välj scen");
 		for (String name : s) {
 			cmbStage.addItem(name);
@@ -199,6 +246,8 @@ public class AdminUIWB {
 	}
 
 	public void populateDayBox(LinkedList<String> s) {
+		cmbDay.removeAllItems();
+
 		cmbDay.addItem("Välj dag");
 		for (String name : s) {
 			cmbDay.addItem(name);
@@ -206,6 +255,8 @@ public class AdminUIWB {
 	}
 
 	public void populateTimeBox(LinkedList<String> s) {
+		cmbTime.removeAllItems();
+
 		cmbTime.addItem("Välj tidpunkt");
 		for (String name : s) {
 			cmbTime.addItem(name);
@@ -213,6 +264,8 @@ public class AdminUIWB {
 	}
 
 	public void populateBandBox2(LinkedList<String> s) {
+		cmbBandContact.removeAllItems();
+
 		cmbBandContact.addItem("Välj band");
 		for (String name : s) {
 			cmbBandContact.addItem(name);
@@ -220,6 +273,8 @@ public class AdminUIWB {
 	}
 
 	public void populateContactBox(LinkedList<String> s) {
+		cmbContact.removeAllItems();
+
 		cmbContact.addItem("Välj kontaktperson");
 		for (String name : s) {
 			cmbContact.addItem(name);

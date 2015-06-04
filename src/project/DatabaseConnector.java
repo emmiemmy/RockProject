@@ -194,7 +194,7 @@ public class DatabaseConnector {
 		try {
 			conn = connectToDatabase();
 			stat = conn.createStatement();
-			String sql = "SELECT sp.Dag "
+			String sql = "SELECT DISTINCT sp.Dag "
 					+ "FROM spelarPa sp "
 					+ "INNER JOIN scen s "
 					+ "ON s.ScenID = sp.ScenID "
@@ -289,11 +289,11 @@ public class DatabaseConnector {
 
 	public static void main(String[] args) {
 		DatabaseConnector dc = new DatabaseConnector();
-		dc.getGigSchedule("Nirvana");
+	//	dc.getGigSchedule("Nirvana");
 //		dc.getStageList();
 //		dc.getEmployeeList();
 //		dc.getTimeList("Blomsterscenen", "Torsdag");
-//		dc.getDayList("Blomsterscenen");
+		dc.getDayList("Blomsterscenen");
 //		dc.getMemberInfo("Kurt Cobain");
 //		dc.getBandInfo("Nirvana");
 //		dc.getBandList();
