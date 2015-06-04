@@ -80,8 +80,8 @@ public class AdminUIWB {
 		btnBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.insertBooking(bandName, stage, day, time);
-				System.out.println("INSERT INTO DB : " + bandName + " " + 
-				stage+ " " + day + " " + time);
+				System.out.println("INSERT INTO DB : " + bandName + " " + stage
+						+ " " + day + " " + time);
 			}
 		});
 
@@ -90,7 +90,10 @@ public class AdminUIWB {
 
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.insertContact(employee, bandNameContact);//SKAPA METOD I CONTROLLER OCH DB
+				controller.insertContact(employee, bandNameContact);// SKAPA
+																	// METOD I
+																	// CONTROLLER
+																	// OCH DB
 			}
 		});
 
@@ -110,14 +113,14 @@ public class AdminUIWB {
 
 		lblBandForPerson.setBounds(10, 334, 89, 14);
 		frame.getContentPane().add(lblBandForPerson);
-		
+
 		cmbBandA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
 				String choice = (String) cb.getSelectedItem();
 				bandName = choice;
 				if (!choice.equals("Välj band"))
-				controller.getStageList();
+					controller.getStageList();
 
 			}
 		});
@@ -125,7 +128,7 @@ public class AdminUIWB {
 		cmbBandA.setBounds(10, 61, 159, 20);
 		frame.getContentPane().add(cmbBandA);
 		controller.getBandList();
-		
+
 		cmbBandContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
@@ -143,20 +146,23 @@ public class AdminUIWB {
 
 		lblContactperson.setBounds(10, 400, 159, 14);
 		frame.getContentPane().add(lblContactperson);
-		
+
 		cmbStage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
 				String choice = (String) cb.getSelectedItem();
 				stage = choice;
-				if (!choice.equals("Välj scen"))
+
+				if (choice != ("Välj scen")) {
 					controller.getStageAvailDay(stage);
+					System.out.println("cmbStage");
+				}
 			}
 		});
 
 		cmbStage.setBounds(10, 117, 159, 20);
 		frame.getContentPane().add(cmbStage);
-		
+
 		cmbContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
@@ -170,15 +176,14 @@ public class AdminUIWB {
 
 		lblDay.setBounds(10, 148, 60, 14);
 		frame.getContentPane().add(lblDay);
-		
-		
+
 		cmbDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
 				String choice = (String) cb.getSelectedItem();
 				day = choice;
-				System.out.println(day);
-					controller.getStageAvailTime(stage, day);
+				System.out.println("Dag:" + day);
+				controller.getStageAvailTime(stage, day);
 			}
 		});
 
@@ -187,14 +192,13 @@ public class AdminUIWB {
 
 		lblTime.setBounds(10, 206, 89, 14);
 		frame.getContentPane().add(lblTime);
-		
-		
+
 		cmbTime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
 				String choice = (String) cb.getSelectedItem();
 				time = choice;
-				
+
 			}
 		});
 
@@ -204,9 +208,9 @@ public class AdminUIWB {
 		lblListContact.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblListContact.setBounds(269, 11, 207, 14);
 		frame.getContentPane().add(lblListContact);
-		
-		/** 
-		 * Knapp som hämtar 
+
+		/**
+		 * Knapp som hämtar
 		 */
 		btnList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -231,8 +235,6 @@ public class AdminUIWB {
 	}
 
 	public void populateBandBox(LinkedList<String> s) {
-		cmbBandA.removeAllItems();
-
 		cmbBandA.addItem("Välj band");
 		for (String name : s) {
 			cmbBandA.addItem(name);

@@ -26,7 +26,9 @@ public class AdminController {
 	 * Metoden hämtar en lista på alla scener
 	 */
 	public void getStageList(){
-		ui.populateStageBox(db.getStageList());//IMPLEMENTERA DB METOD
+		LinkedList<String> s = new LinkedList<String>();
+		s = db.getStageList();
+		ui.populateStageBox(s);//IMPLEMENTERA DB METOD
 		//Returnerar lista med samtliga scener
 	}
 	
