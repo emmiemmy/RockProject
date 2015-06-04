@@ -76,4 +76,13 @@ public class AdminController {
 	public void insertContact(String employee, String bandName){
 		db.insertContactForBand(employee, bandName);//MÅSTE IMPLEMENTERAS I DB
 	}
+	
+	public void insertBandCont(String band, String genre, String country){
+		System.out.println("Controller: insertBandCont():" + band + genre + country);
+		db.insertBand(band, genre, country);
+	}
+	
+	public void insertBandMember(String band, String member){
+		db.insertBandMember(band, member);
+	}
 }

@@ -59,7 +59,7 @@ public class NewBand extends JPanel{
 		JButton btnLggTillBand = new JButton("Lägg till band");
 		btnLggTillBand.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//INSERT BAND 
+				controller.insertBandCont(tfBandName.getText(), tfType.getText(), tfCountry.getText());
 			}
 		});
 		btnLggTillBand.setBounds(94, 143, 142, 28);
@@ -68,7 +68,7 @@ public class NewBand extends JPanel{
 		JButton btnAddMember = new JButton("Lägg till medlem");
 		btnAddMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//LÄGG TILL MEDLEM
+				
 			}
 		});
 		btnAddMember.setBounds(94, 224, 149, 28);

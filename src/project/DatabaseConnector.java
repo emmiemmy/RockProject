@@ -18,7 +18,7 @@ public class DatabaseConnector {
 	private AdminController adminController;
 	private UserUI2 userUI;
 	private AdminUIWB adminUI;
-	private int i = 19;
+	private int i = 18;
 
 	public void setControllers(UserController uc, AdminController ac) {
 		userController = uc;
@@ -393,11 +393,11 @@ public class DatabaseConnector {
 		String sql = "INSERT INTO band(BandID, Namn, Musikstil, Ursprungsland) "
 				+ "VALUES('" + i + "', '" + bandname + "', '" + genre + "', '" + country + "')";
 		
+		System.out.println(i + " " + bandname + " "+ genre + " " + country);
 		i++;
 		stat.executeUpdate(sql);
 		conn.commit();
 		stat.close();
-		System.out.println(i + " " + bandname + " "+ genre + " " + country);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
