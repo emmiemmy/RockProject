@@ -327,6 +327,7 @@ public class DatabaseConnector {
 			stat.executeUpdate(sql2);
 			conn.commit();
 			stat.close();
+			adminUI.lblConfirmBand.setText("Bokning genomförd.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
