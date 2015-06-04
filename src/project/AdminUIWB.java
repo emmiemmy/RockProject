@@ -1,10 +1,16 @@
 package project;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import java.awt.Font;
 import java.util.LinkedList;
@@ -20,6 +26,7 @@ public class AdminUIWB {
 	private JButton btnBook = new JButton("Boka");
 	private JButton btnOK = new JButton("OK");
 	private JButton btnList = new JButton("Skapa lista");
+	private JButton btnNewBand = new JButton("Lägg till band");
 	private JLabel lblBookAGig = new JLabel("Boka band och spelning");
 	private JLabel lblAddPerson = new JLabel("Lägg till kontaktperson");
 	private JLabel lblContactperson = new JLabel("Välj kontaktperson:");
@@ -87,6 +94,19 @@ public class AdminUIWB {
 
 		btnBook.setBounds(10, 275, 100, 23);
 		frame.getContentPane().add(btnBook);
+		
+		btnNewBand.setBounds(369, 508, 150, 23);
+		frame.getContentPane().add(btnNewBand);
+		
+		btnNewBand.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = new JFrame();
+				frame.add(new NewBand(controller));
+				frame.pack();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setVisible(true);	
+			}
+		});
 
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -301,4 +321,6 @@ public class AdminUIWB {
 			cmbContact.addItem(name);
 		}
 	}
+	
+	
 }
