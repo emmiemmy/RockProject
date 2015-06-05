@@ -67,7 +67,11 @@ public class AdminController {
 	 * Ber DB hämta en lista på band och dess kontaktpersoner
 	 */
 	public void getBandContactList(){
-//		db.getBandAndContacts();//MÅSTE IMPLEMENTERAS I DATABASEN
+		db.getBandAndContacts();
+	}
+	
+	public void getSecurityList(){
+		db.listSecurityResp();
 	}
 	/**
 	 * Delegera anställs som kontaktperson till band

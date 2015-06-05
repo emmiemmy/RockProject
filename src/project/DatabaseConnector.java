@@ -18,7 +18,7 @@ public class DatabaseConnector {
 	private AdminController adminController;
 	private UserUI2 userUI;
 	private AdminUIWB adminUI;
-	private int i = 18;
+	private int i = 20;
 
 	public void setControllers(UserController uc, AdminController ac) {
 		userController = uc;
@@ -435,10 +435,79 @@ public class DatabaseConnector {
 			e.printStackTrace();
 		}
 	}
+	
+	public void listSecurityResp() {
+		String stagename = "", day = "", starttime = "", endtime = "", employeename = "", code = "";
+		try {
+		conn = connectToDatabase();
+		stat = conn.createStatement();
+		String sql = "SELECT s.Namn, af.Dag, af.Starttid, af.Sluttid, a.Namn, a.Personnummer "
+				+ "FROM scen s "
+				+ "INNER JOIN ansvarigFor af "
+				+ "ON s.ScenID = af.ScenID "
+				+ "INNER JOIN anstalld a "
+				+ "ON a.AnstID = af.AnstalldID "
+				+ "ORDER BY s.Namn asc, af.Starttid asc, af.Dag asc";
+		
+		rs = stat.executeQuery(sql);
+		
+		while (rs.next()) {
+			stagename = rs.getString("s.Namn");
+			day = rs.getString("af.Dag");
+			starttime = rs.getString("af.Starttid");
+			endtime = rs.getString("af.Sluttid");
+			employeename = rs.getString("a.Namn");
+			code = rs.getString("a.Personnummer");
+			
+			adminUI.textArea.append(stagename+ "     " + day + "     " + starttime + " - " + endtime + "     " + employeename + "     " + code + "\n");
+			
+			System.out.println(stagename + " " + day + " " + starttime + " " + endtime + " " + employeename + " " + code);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	public void getBandAndContacts(){
+		String antalMedlemmar = "", employeename = "";
+		try {
+		conn = connectToDatabase();
+		stat = conn.createStatement();
+		String sql = "SELECT a.Namn, count(m.Namn) as antal "
+				+ "FROM anstalld a "
+				+ "INNER JOIN band b "
+				+ "ON b.KontaktpersonID = a.AnstID "
+				+ "INNER JOIN medlem m "
+				+ "ON m.BandID = b.BandID "
+				+ "WHERE a.AnstID IN "
+				+ "(SELECT AnstID "
+				+ "FROM anstalld) "
+				+ "GROUP BY AnstID";
+				
+				
+		rs = stat.executeQuery(sql);
+		
+		while (rs.next()) {
+			employeename = rs.getString("a.Namn");
+			antalMedlemmar = rs.getString("antal");
+			
+			
+			adminUI.textArea.append(employeename + "     " + antalMedlemmar  + "\n");
+			
+			System.out.println(antalMedlemmar + " " + employeename);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+	}
 
 	public static void main(String[] args) {
 		DatabaseConnector dc = new DatabaseConnector();
-		dc.insertBandMember("Emma Shaky-Shaky", "Emma", "Headbanga");
+		dc.getBandAndContacts();
+		//dc.listSecurityResp();
+		//dc.insertBandMember("Emma Shaky-Shaky", "Emma", "Headbanga");
 //		dc.insertBand("Emma Shaky-Shaky", "Hårdrock", "Sverige");
 //		dc.insertBand("Evy And The Hell dogs", "Hårdrock", "Sverige");
 //		dc.insertContactForBand("Pink Floyd", "Kalle Kula");

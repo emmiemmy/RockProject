@@ -35,7 +35,7 @@ public class AdminUIWB {
 	private JLabel lblStage = new JLabel("Välj scen:");
 	private JLabel lblDay = new JLabel("Välj dag:");
 	private JLabel lblTime = new JLabel("Välj tid:");
-	private JLabel lblListContact = new JLabel("Lista band och kontaktpersoner");
+	private JLabel lblListContact = new JLabel("Lista Kontaktersoner och antal medlemmar:");
 	JLabel lblConfirmBand = new JLabel("");
 	JLabel lblConfirmPerson = new JLabel("");
 	private JComboBox cmbBandA = new JComboBox();
@@ -78,7 +78,7 @@ public class AdminUIWB {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 538, 590);
+		frame.setBounds(100, 100, 780, 590);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -101,7 +101,7 @@ public class AdminUIWB {
 		btnNewBand.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = new JFrame();
-				frame.add(new NewBand(controller));
+				frame.getContentPane().add(new NewBand(controller));
 				frame.pack();
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);	
@@ -226,7 +226,7 @@ public class AdminUIWB {
 		frame.getContentPane().add(cmbTime);
 
 		lblListContact.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblListContact.setBounds(269, 11, 207, 14);
+		lblListContact.setBounds(269, 11, 270, 14);
 		frame.getContentPane().add(lblListContact);
 
 		/**
@@ -238,10 +238,10 @@ public class AdminUIWB {
 			}
 		});
 
-		btnList.setBounds(269, 36, 100, 23);
+		btnList.setBounds(546, 8, 100, 23);
 		frame.getContentPane().add(btnList);
 
-		textArea.setBounds(269, 70, 231, 420);
+		textArea.setBounds(202, 70, 561, 420);
 		frame.getContentPane().add(textArea);
 		lblConfirmBand.setBounds(133, 279, 115, 14);
 
@@ -267,6 +267,16 @@ public class AdminUIWB {
 		btnClear.setBounds(269, 508, 100, 23);
 		
 		frame.getContentPane().add(btnClear);
+		
+		JButton btnListaSkerhetsansvariga = new JButton("Lista säkerhetsansvariga");
+		btnListaSkerhetsansvariga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textArea.setText(" ");
+				controller.getSecurityList();
+			}
+		});
+		btnListaSkerhetsansvariga.setBounds(273, 533, 227, 29);
+		frame.getContentPane().add(btnListaSkerhetsansvariga);
 	}
 
 	public void populateBandBox(LinkedList<String> s) {
@@ -321,6 +331,4 @@ public class AdminUIWB {
 			cmbContact.addItem(name);
 		}
 	}
-	
-	
 }
